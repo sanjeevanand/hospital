@@ -3,14 +3,14 @@
  <section class="navigation">
         <ul>
             <li>
-                <a href="dashboard.html" class="activeMenu">
+                <a href="dashboard" class="activeMenu">
                     <img src="${pageContext.request.contextPath}/jsp/doctor/images/menuIcons/appoinment.png">
                     <span class="menuText">Appointments</span>
 
                 </a>
             </li>
             <li>
-                <a href="myPatients.html">
+                <a href="myPatients">
                     <img src="${pageContext.request.contextPath}/jsp/doctor/images/menuIcons/patient.png">
                     <span class="menuText">My Patients</span>
 

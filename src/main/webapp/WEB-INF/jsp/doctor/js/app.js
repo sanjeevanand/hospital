@@ -26,10 +26,40 @@ $(function(){
                 {"regNo": $("#regNo").val(),"regYear":$("#regYear").val()},
                 function(data) {
                 	 if(data){
-                		 alert(data);
-						 $(location).attr('href',"/doctor/dashboard");
+                		// alert(data);
+						 $(location).attr('href',"/doctor/registration");
 					 }else{
-						 alert("Invalid Otp");
+						 alert("Invalid ");
+					 }
+                }
+             );
+    });
+    
+    $('#educationDocUpdate').click(function(e){
+    	$.post( 
+                "/rest/doctorRegistrationDoc",
+                {"regNo": $("#regNo").val(),"regYear":$("#regYear").val()},
+                function(data) {
+                	 if(data){
+                		// alert(data);
+						 $(location).attr('href',"/doctor/registration");
+					 }else{
+						 alert("Invalid ");
+					 }
+                }
+             );
+    });
+    
+    $('#workExperienceDocUpdate').click(function(e){
+    	$.post( 
+                "/rest/doctorRegistrationDoc",
+                {"regNo": $("#regNo").val(),"regYear":$("#regYear").val()},
+                function(data) {
+                	 if(data){
+                		// alert(data);
+						 $(location).attr('href',"/doctor/registration");
+					 }else{
+						 alert("Invalid ");
 					 }
                 }
              );

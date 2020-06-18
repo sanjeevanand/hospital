@@ -85,6 +85,11 @@ public class Doctor implements Serializable{
 	@Column
 	private String regYear;
 	
+	@Column
+	private String education;
+	
+	@Column
+	private String workExperience;
 	
 	public String getRegNo() {
 		return regNo;
@@ -273,6 +278,22 @@ public class Doctor implements Serializable{
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getEducation() {
+		return education;
+	}
+
+	public void setEducation(String education) {
+		this.education = education;
+	}
+
+	public String getWorkExperience() {
+		return workExperience;
+	}
+
+	public void setWorkExperience(String workExperience) {
+		this.workExperience = workExperience;
 	}
 	
 }

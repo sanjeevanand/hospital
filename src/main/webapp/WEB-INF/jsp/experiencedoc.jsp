@@ -79,26 +79,10 @@
                                 <td class="text-right">
 
                                     <a href="#" class="mr-5">
-                                        <img src="images/editIcon.png" alt="">
+                                        <img src="${pageContext.request.contextPath}/jsp/doctor/images/editIcon.png" alt="">
                                     </a>
                                     <a href="#" class="mr-5">
-                                        <img src="images/deleteIcon.png" alt="">
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-
-                                <td>2006 - 2016 Chief Consultant at 32 Smiles
-                                    Multispecialty Dental Clinic</td>
-
-
-                                <td class="text-right">
-
-                                    <a href="#" class="mr-5">
-                                        <img src="images/editIcon.png" alt="">
-                                    </a>
-                                    <a href="#" class="mr-5">
-                                        <img src="images/deleteIcon.png" alt="">
+                                        <img src="${pageContext.request.contextPath}/jsp/doctor/images/deleteIcon.png" alt="">
                                     </a>
                                 </td>
                             </tr>
@@ -111,10 +95,26 @@
                                 <td class="text-right">
 
                                     <a href="#" class="mr-5">
-                                        <img src="images/editIcon.png" alt="">
+                                        <img src="${pageContext.request.contextPath}/jsp/doctor/images/editIcon.png" alt="">
                                     </a>
                                     <a href="#" class="mr-5">
-                                        <img src="images/deleteIcon.png" alt="">
+                                        <img src="${pageContext.request.contextPath}/jsp/doctor/images/deleteIcon.png" alt="">
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+
+                                <td>2006 - 2016 Chief Consultant at 32 Smiles
+                                    Multispecialty Dental Clinic</td>
+
+
+                                <td class="text-right">
+
+                                    <a href="#" class="mr-5">
+                                        <img src="${pageContext.request.contextPath}/jsp/doctor/images/editIcon.png" alt="">
+                                    </a>
+                                    <a href="#" class="mr-5">
+                                        <img src="${pageContext.request.contextPath}/jsp/doctor/images/deleteIcon.png" alt="">
                                     </a>
                                 </td>
                             </tr>
@@ -145,10 +145,10 @@
                                 <td class="text-right" width="30%">
 
                                     <a href="#" class="mr-5">
-                                        <img src="images/editIcon.png" alt="">
+                                        <img src="${pageContext.request.contextPath}/jsp/doctor/images/editIcon.png" alt="">
                                     </a>
                                     <a href="#" class="mr-5">
-                                        <img src="images/deleteIcon.png" alt="">
+                                        <img src="${pageContext.request.contextPath}/jsp/doctor/images/deleteIcon.png" alt="">
                                     </a>
                                 </td>
                             </tr>
@@ -163,10 +163,10 @@
                                 <td class="text-right">
 
                                     <a href="#" class="mr-5">
-                                        <img src="images/save.png" alt="">
+                                        <img src="${pageContext.request.contextPath}/jsp/doctor/images/save.png" alt="">
                                     </a>
                                     <a href="#" class="mr-5">
-                                        <img src="images/cancel.png" alt="">
+                                        <img src="${pageContext.request.contextPath}/jsp/doctor/images/cancel.png" alt="">
                                     </a>
                                 </td>
                             </tr>
