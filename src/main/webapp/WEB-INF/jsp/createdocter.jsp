@@ -38,15 +38,15 @@
                         Documents</a>
                 </li>
                 <li>
-                    <a href="experience.html">Experience &<br />
+                    <a href="experiencedoc">Experience &<br />
                         Education</a>
                 </li>
                 <li>
-                    <a href="services.html">Services<br />
+                    <a href="servicedoc">Services<br />
                         Details</a>
                 </li>
                 <li>
-                    <a href="awards.html">
+                    <a href="awardsdoc">
                         Awards &<br />
                         Memberships
                     </a>

@@ -284,7 +284,7 @@ public class DoctorController {
 			return "logind";
 		}
 	}
-	@GetMapping("/service")
+	@GetMapping("/services")
 	public String servicedoc(HttpServletRequest req,Model m) {
 		System.out.println("path=/setting");
 		Doctor sessionPatient = (Doctor) req.getSession().getAttribute("userDoctor");

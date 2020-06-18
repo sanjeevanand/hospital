@@ -19,89 +19,9 @@
 </head>
 
 <body>
-    <header class="primaryHeader">
-        <h1>My Hospitals</h1>
-        <a href="#" class="navIcon" data-toggle="tooltip" title="Show and hide menu" data-placement="bottom">
-            <img src="${pageContext.request.contextPath}/jsp/doctor/images/nav.png">
-        </a>
-        <a href="#" class="notificationIcon">
-            <img src="${pageContext.request.contextPath}/jsp/doctor/images/bell.png">
-        </a>
-        <p>Welcome
-            <span>Ram Das</span>
-        </p>
-        <div class="profileImage">
-            <img src="${pageContext.request.contextPath}/jsp/doctor/images/profile.jpg">
-        </div>
-    </header>
-    <section class="navigation">
-        <ul>
-            <li>
-                <a href="dashboard.html">
-                    <img src="${pageContext.request.contextPath}/jsp/doctor/images/menuIcons/appoinment.png">
-                    <span class="menuText">My Appointments</span>
-
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <img src="${pageContext.request.contextPath}/jsp/doctor/images/menuIcons/report.png">
-                    <span class="menuText">My medical Records</span>
-
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <img src="${pageContext.request.contextPath}/jsp/doctor/images/menuIcons/lab.png">
-                    <span class="menuText">Lab Test</span>
-
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <img src="${pageContext.request.contextPath}/jsp/doctor/images/menuIcons/online.png">
-                    <span class="menuText">Online Consultations</span>
-
-                </a>
-            </li>
-            <li>
-                <a href="reviews.html">
-                    <img src="${pageContext.request.contextPath}/jsp/doctor/images/menuIcons/feedback.png">
-                    <span class="menuText">Reviews</span>
-
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <img src="${pageContext.request.contextPath}/jsp/doctor/images/menuIcons/payment.png">
-                    <span class="menuText">Payments</span>
-
-                </a>
-            </li>
-            <li>
-                <a href="settings.html">
-                    <img src="${pageContext.request.contextPath}/jsp/doctor/images/menuIcons/setting.png">
-                    <span class="menuText">Settings</span>
-
-                </a>
-            </li>
-            <li>
-                <a href="profile.html" class="activeMenu">
-                    <img src="${pageContext.request.contextPath}/jsp/doctor/images/menuIcons/profile.png">
-                    <span class="menuText">Profile</span>
-
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <img src="${pageContext.request.contextPath}/jsp/doctor/images/menuIcons/logout.png">
-                    <span class="menuText">Logout</span>
-
-                </a>
-            </li>
-
-        </ul>
-    </section>
+     <jsp:include page="header_d.jsp" />
+   <jsp:include page="navbar_d.jsp" />
+  
     <section class="dataContainer">
         <div class="pageHeader">
             <h1>Profile</h1>
@@ -111,7 +31,7 @@
 
             <ul class="progressTabs">
                 <li>
-                    <a href="profile.html" class="activeProgress">Personal & <br />
+                    <a href="profile" class="activeProgress">Personal & <br />
                         Contact Details</a>
                 </li>
                 <li>
@@ -119,15 +39,15 @@
                         Documents</a>
                 </li>
                 <li>
-                    <a href="experience.html">Experience &<br />
+                    <a href="experience">Experience &<br />
                         Education</a>
                 </li>
                 <li>
-                    <a href="services.html">Services<br />
+                    <a href="services">Services<br />
                         Details</a>
                 </li>
                 <li>
-                    <a href="awards.html">
+                    <a href="awards">
                         Awards &<br />
                         Memberships
                     </a>

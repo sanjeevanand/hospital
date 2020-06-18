@@ -111,23 +111,23 @@
 
             <ul class="progressTabs">
                 <li>
-                    <a href="profile.html" class="completedProgress">Personal & <br />
+                    <a href="profile" class="completedProgress">Personal & <br />
                         Contact Details</a>
                 </li>
                 <li>
-                    <a href="registration.html" class="activeProgress">Registration & <br />
+                    <a href="registration" class="activeProgress">Registration & <br />
                         Documents</a>
                 </li>
                 <li>
-                    <a href="experience.html">Experience &<br />
+                    <a href="experience">Experience &<br />
                         Education</a>
                 </li>
                 <li>
-                    <a href="services.html">Services<br />
+                    <a href="services">Services<br />
                         Details</a>
                 </li>
                 <li>
-                    <a href="awards.html">
+                    <a href="awards">
                         Awards &<br />
                         Memberships
                     </a>

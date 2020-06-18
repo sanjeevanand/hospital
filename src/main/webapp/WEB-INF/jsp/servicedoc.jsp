@@ -32,23 +32,23 @@
 
             <ul class="progressTabs">
                 <li>
-                    <a href="profile.html" class="completedProgress">Personal & <br />
+                    <a href="profile" class="completedProgress">Personal & <br />
                         Contact Details</a>
                 </li>
                 <li>
-                    <a href="registration.html" class="completedProgress">Registration & <br />
+                    <a href="registration" class="completedProgress">Registration & <br />
                         Documents</a>
                 </li>
                 <li>
-                    <a href="experience.html" class="activeProgress">Experience &<br />
+                    <a href="experience" class="activeProgress">Experience &<br />
                         Education</a>
                 </li>
                 <li>
-                    <a href="services.html">Services<br />
+                    <a href="services">Services<br />
                         Details</a>
                 </li>
                 <li>
-                    <a href="awards.html">
+                    <a href="awards">
                         Awards &<br />
                         Memberships
                     </a>
