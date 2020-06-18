@@ -132,6 +132,20 @@ public class AdminContoller {
 		return "doctorslist";
 		}
 	}
+  @GetMapping("/registration")
+	public String registrationdoc(HttpServletRequest req,Model m) {
+		System.out.println("path=/setting");
+	//	Doctor sessionPatient = (Doctor) req.getSession().getAttribute("userDoctor");
+	
+	//	if (sessionPatient != null) {
+	//		m.addAttribute("userDoctor", sessionPatient);
+	//		return "regdoc";
+	//	}
+	//	else {
+	//		return "logind";
+	//	}
+		return "regdoc_admin";
+	}
   @GetMapping("doctersmaster")	
   public String doctersmaster(Model m) {
 	  

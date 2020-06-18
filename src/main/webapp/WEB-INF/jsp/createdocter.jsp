@@ -30,7 +30,7 @@
 
             <ul class="progressTabs">
                 <li>
-                    <a href="profile.html" class="activeProgress">Personal & <br />
+                    <a href="createdocter" class="activeProgress">Personal & <br />
                         Contact Details</a>
                 </li>
                 <li>

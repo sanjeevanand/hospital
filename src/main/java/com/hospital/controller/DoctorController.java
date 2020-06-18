@@ -270,4 +270,44 @@ public class DoctorController {
 			return "logind";
 		}
 	}
+	
+	@GetMapping("/experience")
+	public String experiencedoc(HttpServletRequest req,Model m) {
+		System.out.println("path=/setting");
+		Doctor sessionPatient = (Doctor) req.getSession().getAttribute("userDoctor");
+	
+		if (sessionPatient != null) {
+			m.addAttribute("userDoctor", sessionPatient);
+			return "experiencedoc";
+		}
+		else {
+			return "logind";
+		}
+	}
+	@GetMapping("/service")
+	public String servicedoc(HttpServletRequest req,Model m) {
+		System.out.println("path=/setting");
+		Doctor sessionPatient = (Doctor) req.getSession().getAttribute("userDoctor");
+	
+		if (sessionPatient != null) {
+			m.addAttribute("userDoctor", sessionPatient);
+			return "servicedoc";
+		}
+		else {
+			return "logind";
+		}
+	}
+	@GetMapping("/awards")
+	public String awardsdoc(HttpServletRequest req,Model m) {
+		System.out.println("path=/setting");
+		Doctor sessionPatient = (Doctor) req.getSession().getAttribute("userDoctor");
+	
+		if (sessionPatient != null) {
+			m.addAttribute("userDoctor", sessionPatient);
+			return "awardsdoc";
+		}
+		else {
+			return "logind";
+		}
+	}
 }
