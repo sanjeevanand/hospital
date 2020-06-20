@@ -289,7 +289,20 @@ public class Doctor implements Serializable{
 	@JsonIgnore
 	private List<Education> educationList;
 
+	@OneToMany(fetch=FetchType.LAZY,
+			   cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+						 CascadeType.DETACH, CascadeType.REFRESH})
+	@JoinColumn(name="doctor_id")
+	@JsonIgnore
+	private List<Awards> awardsList;
 
+	@OneToMany(fetch=FetchType.LAZY,
+			   cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+						 CascadeType.DETACH, CascadeType.REFRESH})
+	@JoinColumn(name="doctor_id")
+	@JsonIgnore
+	private List<Membership> membershipList;
+	
 	public List<WorkExperience> getWorkExperienceList() {
 		return workExperienceList;
 	}
@@ -306,6 +319,22 @@ public class Doctor implements Serializable{
 		this.educationList = educationList;
 	}
 	
+	public List<Awards> getAwardsList() {
+		return awardsList;
+	}
+
+	public void setAwardsList(List<Awards> awardsList) {
+		this.awardsList = awardsList;
+	}
+
+	public List<Membership> getMembershipList() {
+		return membershipList;
+	}
+
+	public void setMembershipList(List<Membership> membershipList) {
+		this.membershipList = membershipList;
+	}
+
 	public void addEducationList(Education education){
 		if(this.educationList==null){
 			this.educationList = new ArrayList<>();
@@ -317,5 +346,17 @@ public class Doctor implements Serializable{
 			this.workExperienceList = new ArrayList<>();
 		}
 		this.workExperienceList.add(workExperience);
+	}
+	public void addawardsList(Awards awards){
+		if(this.awardsList==null){
+			this.awardsList = new ArrayList<>();
+		}
+		this.awardsList.add(awards);
+	}
+	public void addMembershipList(Membership membership){
+		if(this.membershipList==null){
+			this.membershipList = new ArrayList<>();
+		}
+		this.membershipList.add(membership);
 	}
 }

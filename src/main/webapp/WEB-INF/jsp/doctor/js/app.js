@@ -70,10 +70,25 @@ $(function(){
     
     
     $('#addAwards').click(function(e){
-    	var awards = $("Awards").val();
+    	var awards = $("#Awards").val();
     	$.post( 
-                "/rest/doctorExperiencedDoc",
-                {"workExperience": workExperience},
+                "/rest/doctorAwardsDoc",
+                {"awards": awards},
+                function(data) {
+                	 if(data){
+                		// alert(data);
+						 $(location).attr('href',"/doctor/awards");
+					 }else{
+						 alert("Invalid ");
+					 }
+                }
+             );
+    });
+    $('#addMemberships').click(function(e){
+    	var memberships = $("#Memberships").val();
+    	$.post( 
+                "/rest/doctorMembershipsDoc",
+                {"member": memberships},
                 function(data) {
                 	 if(data){
                 		// alert(data);

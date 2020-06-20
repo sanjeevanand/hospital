@@ -63,7 +63,10 @@
                         <h1>
                             Experience
                         </h1>
-
+					 	<select class="form-control">
+                  	<option value="Select Service" />
+                    <options items="${serviceMasterList}"/>
+                  </select>
                         <a href="#" class="btn btn-primary  mb-10 ml-auto">Add New</a>
                     </div>
                     <hr class="m-0">

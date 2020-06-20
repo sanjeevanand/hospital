@@ -1,6 +1,7 @@
 package com.hospital.controller;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,8 +20,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hospital.jpa.AddressRepository;
 import com.hospital.jpa.DoctorRepository;
+import com.hospital.jpa.ServiceMasterRepository;
+import com.hospital.jpa.SpecializationMasterRepository;
 import com.hospital.jpa.DoctorRepository;
 import com.hospital.model.Doctor;
+import com.hospital.model.ServiceMaster;
+import com.hospital.model.SpecializationMaster;
 import com.hospital.util.HospitalUtil;
 import com.hospital.model.Doctor;
 
@@ -31,6 +36,11 @@ public class DoctorController {
 	@Autowired
 	DoctorRepository doctorRepository;
 	
+	@Autowired
+	ServiceMasterRepository  serviceMasterRepository;
+	
+	@Autowired
+	SpecializationMasterRepository specializationMasterRepository;
 	
 	@Autowired
 	AddressRepository addressRepository;
@@ -302,19 +312,29 @@ public class DoctorController {
 	
 		if (sessionPatient != null) {
 			m.addAttribute("userDoctor", sessionPatient);
-			return "servicedoc";
+		List<ServiceMaster>	 serviceMasterList = serviceMasterRepository.findAll();
+		List<SpecializationMaster>	specializationMasterList = specializationMasterRepository.findAll();
+		m.addAttribute("serviceMasterList",serviceMasterList);	
+		m.addAttribute("specializationMasterList",specializationMasterList);	
+		return "servicedoc";
 		}
 		else {
 			return "logind";
 		}
 	}
+	
+	
+	
 	@GetMapping("/awards")
 	public String awardsdoc(HttpServletRequest req,Model m) {
 		System.out.println("path=/awards	");
 		Doctor sessionPatient = (Doctor) req.getSession().getAttribute("userDoctor");
 	
 		if (sessionPatient != null) {
+			Doctor doctor =	doctorRepository.findByMobile(sessionPatient.getMobile());
 			m.addAttribute("userDoctor", sessionPatient);
+			m.addAttribute("awardsList", doctor.getAwardsList());
+			m.addAttribute("membershipList", doctor.getMembershipList());
 			return "awardsdoc";
 		}
 		else {

@@ -24,8 +24,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hospital.jpa.DoctorRepository;
 import com.hospital.jpa.OtpRepository;
+import com.hospital.model.Awards;
 import com.hospital.model.Doctor;
 import com.hospital.model.Education;
+import com.hospital.model.Membership;
 import com.hospital.model.Otp;
 import com.hospital.model.WorkExperience;
 import com.hospital.util.HospitalUtil;
@@ -199,7 +201,83 @@ public class DoctorRestController {
 			response.sendRedirect("/doctor/");
 		}
 	}
+	@PostMapping(value = "/doctorAwardsDoc")
+	public boolean doctorAwardsDoc(HttpServletRequest req, Model m, Awards awards) {
 
+		Doctor sessionPatient = (Doctor) req.getSession().getAttribute("userDoctor");
+		boolean save = false;
+		if (sessionPatient != null) {
+			Doctor obj = doctorRepository.findByMobile(sessionPatient.getMobile());
+			// obj.setRegNo(doctor.getRegNo());
+			// obj.setRegYear(doctor.getRegYear());
+			obj.addawardsList(awards);
+			req.getSession().setAttribute("userDoctor", obj);
+			save = true;
+		} else {
+			save = false;
+		}
+		return save;
+	}
+	@GetMapping(value = "/deleteDoctorAwardsDoc/{awards}")
+	public void deleteDoctorAwardsDoc(@PathVariable("awards") String awards,HttpServletRequest req,HttpServletResponse response) throws IOException {
+
+		Doctor sessionPatient = (Doctor) req.getSession().getAttribute("userDoctor");
+		boolean save = false;
+		if (sessionPatient != null) {
+			Doctor obj = doctorRepository.findByMobile(sessionPatient.getMobile());
+		List<Awards>	newList = new ArrayList<>();
+		
+			for(Awards x : obj.getAwardsList()){
+				if(awards.equals(x.getAwards()))
+				newList.add(x);
+			}
+			obj.getAwardsList().removeAll(newList);
+			doctorRepository.save(obj);
+			req.getSession().setAttribute("userDoctor", obj);
+		response.sendRedirect("/doctor/awards");
+		}else {
+			response.sendRedirect("/doctor/");
+		}
+	}
+	@PostMapping(value = "/doctorMembershipsDoc")
+	public boolean doctorMembershipsDoc(HttpServletRequest req, Model m, Membership membership) {
+
+		Doctor sessionPatient = (Doctor) req.getSession().getAttribute("userDoctor");
+		boolean save = false;
+		if (sessionPatient != null) {
+			Doctor obj = doctorRepository.findByMobile(sessionPatient.getMobile());
+			// obj.setRegNo(doctor.getRegNo());
+			// obj.setRegYear(doctor.getRegYear());
+			obj.addMembershipList(membership);
+			req.getSession().setAttribute("userDoctor", obj);
+			save = true;
+		} else {
+			save = false;
+		}
+		return save;
+	}
+	
+	@GetMapping(value = "/deleteDoctorMemberDoc/{member}")
+	public void deleteDoctorMemberDoc(@PathVariable("member") String member,HttpServletRequest req,HttpServletResponse response) throws IOException {
+
+		Doctor sessionPatient = (Doctor) req.getSession().getAttribute("userDoctor");
+		boolean save = false;
+		if (sessionPatient != null) {
+			Doctor obj = doctorRepository.findByMobile(sessionPatient.getMobile());
+		List<Membership>	newList = new ArrayList<>();
+		
+			for(Membership x : obj.getMembershipList()){
+				if(member.equals(x.getMember()))
+				newList.add(x);
+			}
+			obj.getMembershipList().removeAll(newList);
+			doctorRepository.save(obj);
+			req.getSession().setAttribute("userDoctor", obj);
+		response.sendRedirect("/doctor/awards");
+		}else {
+			response.sendRedirect("/doctor/");
+		}
+	}
 	void sendEmail(Doctor doctor) {
 
         SimpleMailMessage msg = new SimpleMailMessage();
