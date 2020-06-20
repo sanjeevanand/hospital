@@ -40,15 +40,15 @@
                         Documents</a>
                 </li>
                 <li>
-                    <a href="experience" class="activeProgress">Experience &<br />
+                    <a href="experience" class="completedProgress">Experience &<br />
                         Education</a>
                 </li>
                 <li>
-                    <a href="services">Services<br />
+                    <a href="services" class="completedProgress">Services<br />
                         Details</a>
                 </li>
                 <li>
-                    <a href="awards">
+                    <a href="awards"  class="activeProgress">
                         Awards &<br />
                         Memberships
                     </a>
@@ -56,27 +56,26 @@
             </ul>
 
 
-
             <div class="row">
                 <div class="col-sm-6">
                     <div class="filterSection" id="filter">
-                        <h1>
-                            Experience
+                       
+						<div class="col-sm-10">
+						 <h1>
+                            Awards and Recognitions
                         </h1>
-
-                        <a href="#" class="btn btn-primary  mb-10 ml-auto">Add New</a>
+                            <div class="inputGroup">
+                                <input id ="Awards" type="text" class="form-control" placeholder="Recognized by Indian Dental Council of India - 2006">
+                            </div>
+                        </div>
+                        <button id="addAwards" class="btn btn-primary  mb-10 ml-auto">Add</button>
                     </div>
                     <hr class="m-0">
 
-                    <table class="themeTable">
+                     <table class="themeTable">
                         <tbody>
-
                             <tr>
-
-                                <td>2006 - 2016 Chief Consultant at 32 Smiles
-                                    Multispecialty Dental Clinic</td>
-
-
+                                <td width="70%">Recognized by Indian Dental Council of India - 2006</td>
                                 <td class="text-right">
 
                                     <a href="#" class="mr-5">
@@ -87,38 +86,7 @@
                                     </a>
                                 </td>
                             </tr>
-                            <tr>
-
-                                <td>2006 - 2016 Chief Consultant at 32 Smiles
-                                    Multispecialty Dental Clinic</td>
-
-
-                                <td class="text-right">
-
-                                    <a href="#" class="mr-5">
-                                        <img src="images/editIcon.png" alt="">
-                                    </a>
-                                    <a href="#" class="mr-5">
-                                        <img src="images/deleteIcon.png" alt="">
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-
-                                <td>2006 - 2016 Chief Consultant at 32 Smiles
-                                    Multispecialty Dental Clinic</td>
-
-
-                                <td class="text-right">
-
-                                    <a href="#" class="mr-5">
-                                        <img src="images/editIcon.png" alt="">
-                                    </a>
-                                    <a href="#" class="mr-5">
-                                        <img src="images/deleteIcon.png" alt="">
-                                    </a>
-                                </td>
-                            </tr>
+                          
 
 
                         </tbody>
@@ -126,21 +94,24 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="filterSection" id="filter">
-                        <h1>
-                            Education
+                       
+						<div class="col-sm-10">
+						 <h1>
+                            Memberships
                         </h1>
-
-                        <a href="#" class="btn btn-primary  mb-10 ml-auto">Add New</a>
+                            <div class="inputGroup">
+                                <input id="Memberships" type="text" class="form-control" placeholder="Indian Academy of Oral Medicine and Radiology">
+                            </div>
+                        </div>
+                        <button id="addMemberships" class="btn btn-primary  mb-10 ml-auto">Add</button>
                     </div>
                     <hr class="m-0">
-
-                    <table class="themeTable">
+					<table class="themeTable">
                         <tbody>
 
                             <tr>
 
-                                <td width="70%">BDS - Rajiv Gandhi University of Health Sciences,
-                                    Bangalore, India, 2006</td>
+                                <td width="70%">Indian Academy of Oral Medicine and Radiology</td>
 
 
                                 <td class="text-right" width="30%">
@@ -153,28 +124,13 @@
                                     </a>
                                 </td>
                             </tr>
-                            <tr>
+                          
 
-                                <td>
-                                    <input type="text" class="form-control"
-                                        value="MDS - Oral Medicine and Radiology - Rajiv Gandhi ">
-                                </td>
-
-
-                                <td class="text-right">
-
-                                    <a href="#" class="mr-5">
-                                        <img src="images/save.png" alt="">
-                                    </a>
-                                    <a href="#" class="mr-5">
-                                        <img src="images/cancel.png" alt="">
-                                    </a>
-                                </td>
-                            </tr>
 
 
                         </tbody>
-                    </table>
+                    </table>	
+                    
                 </div>
                
             </div>

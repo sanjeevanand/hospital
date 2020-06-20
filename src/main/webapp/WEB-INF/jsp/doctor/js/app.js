@@ -36,13 +36,14 @@ $(function(){
     });
     
     $('#educationDocUpdate').click(function(e){
+    	//var education = prompt("Please Enter Your Education Details", "");
     	$.post( 
-                "/rest/doctorRegistrationDoc",
-                {"regNo": $("#regNo").val(),"regYear":$("#regYear").val()},
+                "/rest/doctorEducationDoc",
+                {"education": $('#education').val()},
                 function(data) {
                 	 if(data){
                 		// alert(data);
-						 $(location).attr('href',"/doctor/registration");
+						 $(location).attr('href',"/doctor/experience");
 					 }else{
 						 alert("Invalid ");
 					 }
@@ -51,13 +52,32 @@ $(function(){
     });
     
     $('#workExperienceDocUpdate').click(function(e){
+    	//var workExperience = prompt("Please Enter Your workExperience Details", "");
     	$.post( 
-                "/rest/doctorRegistrationDoc",
-                {"regNo": $("#regNo").val(),"regYear":$("#regYear").val()},
+                "/rest/doctorExperiencedDoc",
+                {"experience": $('#workExperience').val()},
                 function(data) {
                 	 if(data){
                 		// alert(data);
-						 $(location).attr('href',"/doctor/registration");
+						 $(location).attr('href',"/doctor/experience");
+					 }else{
+						 alert("Invalid ");
+					 }
+                }
+             );
+    });
+    
+    
+    
+    $('#addAwards').click(function(e){
+    	var awards = $("Awards").val();
+    	$.post( 
+                "/rest/doctorExperiencedDoc",
+                {"workExperience": workExperience},
+                function(data) {
+                	 if(data){
+                		// alert(data);
+						 $(location).attr('href',"/doctor/awards");
 					 }else{
 						 alert("Invalid ");
 					 }

@@ -21,6 +21,7 @@ import com.hospital.jpa.AddressRepository;
 import com.hospital.jpa.DoctorRepository;
 import com.hospital.jpa.DoctorRepository;
 import com.hospital.model.Doctor;
+import com.hospital.util.HospitalUtil;
 import com.hospital.model.Doctor;
 
 @Controller
@@ -47,7 +48,12 @@ public class DoctorController {
 		System.out.println("path=/admin/loginSubmit");
 		String mobile = req.getParameter("mobile");
 		String pswd = req.getParameter("pwd");
-		Doctor user = doctorRepository.findByMobile(mobile);
+		Doctor user = null;
+		if (HospitalUtil.isEmail(mobile)) {
+			user = doctorRepository.findByEmail(mobile);
+		} else {
+			user = doctorRepository.findByMobile(mobile);
+		}
 		if (user != null) {
 			Doctor sessionDoctor = (Doctor) req.getSession().getAttribute("userDoctor");
 
@@ -273,11 +279,16 @@ public class DoctorController {
 	
 	@GetMapping("/experience")
 	public String experiencedoc(HttpServletRequest req,Model m) {
-		System.out.println("path=/setting");
+		System.out.println("path=/experience");
 		Doctor sessionPatient = (Doctor) req.getSession().getAttribute("userDoctor");
 	
 		if (sessionPatient != null) {
+			Doctor doctor =	doctorRepository.findByMobile(sessionPatient.getMobile());
+			
+			
 			m.addAttribute("userDoctor", sessionPatient);
+			m.addAttribute("workExperienceList", doctor.getWorkExperienceList());
+			m.addAttribute("educationList", doctor.getEducationList());
 			return "experiencedoc";
 		}
 		else {
@@ -299,7 +310,7 @@ public class DoctorController {
 	}
 	@GetMapping("/awards")
 	public String awardsdoc(HttpServletRequest req,Model m) {
-		System.out.println("path=/setting");
+		System.out.println("path=/awards	");
 		Doctor sessionPatient = (Doctor) req.getSession().getAttribute("userDoctor");
 	
 		if (sessionPatient != null) {

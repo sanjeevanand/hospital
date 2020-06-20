@@ -13,7 +13,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -45,10 +44,10 @@ public class Doctor implements Serializable{
     private String dob;
 	
 	
-	@Column(unique = true)
+	@Column//(unique = true)
     private String mobile;
 	
-	@Column
+	@Column//(unique = true)
     private String email;
 	
 	@Column
@@ -85,11 +84,6 @@ public class Doctor implements Serializable{
 	@Column
 	private String regYear;
 	
-	@Column
-	private String education;
-	
-	@Column
-	private String workExperience;
 	
 	public String getRegNo() {
 		return regNo;
@@ -280,20 +274,48 @@ public class Doctor implements Serializable{
 		this.status = status;
 	}
 
-	public String getEducation() {
-		return education;
+	
+	@OneToMany(fetch=FetchType.LAZY,
+			   cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+						 CascadeType.DETACH, CascadeType.REFRESH})
+	@JoinColumn(name="doctor_id")
+	@JsonIgnore
+	private List<WorkExperience> workExperienceList;
+	
+	@OneToMany(fetch=FetchType.LAZY,
+			   cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+						 CascadeType.DETACH, CascadeType.REFRESH})
+	@JoinColumn(name="doctor_id")
+	@JsonIgnore
+	private List<Education> educationList;
+
+
+	public List<WorkExperience> getWorkExperienceList() {
+		return workExperienceList;
 	}
 
-	public void setEducation(String education) {
-		this.education = education;
+	public void setWorkExperienceList(List<WorkExperience> workExperienceList) {
+		this.workExperienceList = workExperienceList;
 	}
 
-	public String getWorkExperience() {
-		return workExperience;
+	public List<Education> getEducationList() {
+		return educationList;
 	}
 
-	public void setWorkExperience(String workExperience) {
-		this.workExperience = workExperience;
+	public void setEducationList(List<Education> educationList) {
+		this.educationList = educationList;
 	}
 	
+	public void addEducationList(Education education){
+		if(this.educationList==null){
+			this.educationList = new ArrayList<>();
+		}
+		this.educationList.add(education);
+	}
+	public void addworkExperienceList(WorkExperience workExperience){
+		if(this.workExperienceList==null){
+			this.workExperienceList = new ArrayList<>();
+		}
+		this.workExperienceList.add(workExperience);
+	}
 }

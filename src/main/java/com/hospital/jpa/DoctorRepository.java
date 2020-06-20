@@ -6,5 +6,6 @@ import com.hospital.model.Doctor;
 public interface DoctorRepository extends JpaRepository<Doctor, Long>     {
 	
 	Doctor findByMobile(String mobile);
+	Doctor findByEmail(String email);
 
 }

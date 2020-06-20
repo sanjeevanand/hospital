@@ -59,17 +59,42 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="filterSection" id="filter">
-                        <h1>
+                    
+                    <div class="col-sm-10">
+						 <h1>
                             Experience
                         </h1>
+                            <div class="inputGroup">
+                                <input id ="workExperience" type="text" class="form-control" placeholder="Recognized by Indian Dental Council of India - 2006">
+                            </div>
+                        </div>
+                        <button id="workExperienceDocUpdate" class="btn btn-primary  mb-10 ml-auto">Add</button>
+                  
+                       
 
-                        <a href="#" class="btn btn-primary  mb-10 ml-auto">Add New</a>
                     </div>
                     <hr class="m-0">
 
                     <table class="themeTable">
                         <tbody>
+							 <c:forEach var="workExperience" items="${workExperienceList}">
+                        
+                        <c:url var="deleteLink" value="/rest/deleteDoctorExperiencedDoc/${workExperience.experience}">
+					  </c:url>
+                            <tr>
 
+                                <td>${workExperience.experience}</td>
+
+
+                                <td class="text-right">
+
+                                   
+                                    <a href="${deleteLink}" class="mr-5">
+                                        <img src="${pageContext.request.contextPath}/jsp/doctor/images/deleteIcon.png" alt="">
+                                    </a>
+                                </td>
+                            </tr>
+                            </c:forEach>
                             <tr>
 
                                 <td>2006 - 2016 Chief Consultant at 32 Smiles
@@ -86,90 +111,44 @@
                                     </a>
                                 </td>
                             </tr>
-                            <tr>
-
-                                <td>2006 - 2016 Chief Consultant at 32 Smiles
-                                    Multispecialty Dental Clinic</td>
-
-
-                                <td class="text-right">
-
-                                    <a href="#" class="mr-5">
-                                        <img src="${pageContext.request.contextPath}/jsp/doctor/images/editIcon.png" alt="">
-                                    </a>
-                                    <a href="#" class="mr-5">
-                                        <img src="${pageContext.request.contextPath}/jsp/doctor/images/deleteIcon.png" alt="">
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-
-                                <td>2006 - 2016 Chief Consultant at 32 Smiles
-                                    Multispecialty Dental Clinic</td>
-
-
-                                <td class="text-right">
-
-                                    <a href="#" class="mr-5">
-                                        <img src="${pageContext.request.contextPath}/jsp/doctor/images/editIcon.png" alt="">
-                                    </a>
-                                    <a href="#" class="mr-5">
-                                        <img src="${pageContext.request.contextPath}/jsp/doctor/images/deleteIcon.png" alt="">
-                                    </a>
-                                </td>
-                            </tr>
-
-
+                           
                         </tbody>
                     </table>
                 </div>
                 <div class="col-sm-6">
                     <div class="filterSection" id="filter">
-                        <h1>
+                                        <div class="col-sm-10">
+                    
+                     <h1>
                             Education
                         </h1>
-
-                        <a href="#" class="btn btn-primary  mb-10 ml-auto">Add New</a>
+                            <div class="inputGroup">
+                                <input id ="education" type="text" class="form-control" placeholder="Recognized by Indian Dental Council of India - 2006">
+                            </div>
+                        </div>
+                        <button id="educationDocUpdate" class="btn btn-primary  mb-10 ml-auto">Add</button>
                     </div>
                     <hr class="m-0">
 
                     <table class="themeTable">
                         <tbody>
-
+							 <c:forEach var="education" items="${educationList}">
+                        
+                        <c:url var="deleteLink" value="/rest/deleteDoctorEducationDoc/${education.education}">
+					  </c:url>
                             <tr>
 
-                                <td width="70%">BDS - Rajiv Gandhi University of Health Sciences,
-                                    Bangalore, India, 2006</td>
-
-
+                                <td>${education.education}</td>
                                 <td class="text-right" width="30%">
 
-                                    <a href="#" class="mr-5">
-                                        <img src="${pageContext.request.contextPath}/jsp/doctor/images/editIcon.png" alt="">
-                                    </a>
-                                    <a href="#" class="mr-5">
+                                   
+                                    <a href="${ deleteLink}" class="mr-5">
                                         <img src="${pageContext.request.contextPath}/jsp/doctor/images/deleteIcon.png" alt="">
                                     </a>
                                 </td>
                             </tr>
-                            <tr>
-
-                                <td>
-                                    <input type="text" class="form-control"
-                                        value="MDS - Oral Medicine and Radiology - Rajiv Gandhi ">
-                                </td>
-
-
-                                <td class="text-right">
-
-                                    <a href="#" class="mr-5">
-                                        <img src="${pageContext.request.contextPath}/jsp/doctor/images/save.png" alt="">
-                                    </a>
-                                    <a href="#" class="mr-5">
-                                        <img src="${pageContext.request.contextPath}/jsp/doctor/images/cancel.png" alt="">
-                                    </a>
-                                </td>
-                            </tr>
+                            </c:forEach>
+                            
 
 
                         </tbody>
