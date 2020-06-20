@@ -186,7 +186,7 @@ public class DoctorController {
 			lang.put("Tamil", "Tamil");
 			
 			m.addAttribute("lang", lang);
-			return "profiled";
+			return "profile";
 			
 		}
 		else

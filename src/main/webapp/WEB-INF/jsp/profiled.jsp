@@ -107,7 +107,7 @@
                                         </select>
                                     </div>
                                     <div class="col-sm-9">
-                                         <form:input type="text" path="mobile" class="form-control" placeholder="9742225501"/>
+                                         <form:input type="text" path="mobile" class="form-control" placeholder=""/>
                                     </div>
                                 </div>
                             </div>
@@ -115,7 +115,7 @@
                         <div class="col-sm-6">
                             <div class="inputGroup">
                                 <label>Email Address</label>
-                                <form:input type="text" path="email" class="form-control" placeholder="Yogeswaran@gmail.com"/>
+                                <form:input type="text" path="email" class="form-control" placeholder=""/>
                             </div>
                         </div>
                         <div class="col-sm-6">
