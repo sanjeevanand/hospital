@@ -31,12 +31,12 @@
                 <form:form action="savePatient" modelAttribute="patient" method="POST" class="form-horizontal" encType='multipart/form-data'>
 				<form:hidden path="patientId"  />
                 <div class="patientBasic mb-15">
-                    <div class="docProfile">
+                    <!-- <div class="docProfile">
                         <img src="${pageContext.request.contextPath}/jsp/patient/images/doctorSample.jpg" alt="">
-                    </div>
-                    <div class="inputGroup ml-50">
+                    </div> ml-50 inputGroup-->
+                    <div class="col-sm-4">
                         <label>Name</label>
-                        <form:input type="text" path="name" class="form-control" placeholder="Yogeswaran"/>
+                        <form:input type="text" path="name" class="form-control" placeholder="" />
                     </div>
 					
                 </div>
@@ -45,15 +45,15 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="inputGroup">
-                                <label>Phone</label>
+                                <label>Mobile</label>
                                 <div class="row">
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-4">
                                         <select name="" id="" class="form-control">
                                             <option value="">+91</option>
                                         </select>
                                     </div>
-                                    <div class="col-sm-9">
-                                        <form:input path="mobile" type="text" class="form-control" placeholder="9742225501"/>
+                                    <div class="col-sm-8">
+                                        <form:input path="mobile" type="text" class="form-control" placeholder=""/>
                                     </div>
                                 </div>
                             </div>
@@ -77,12 +77,12 @@
                         <div class="col-sm-4">
                             <div class="inputGroup">
                                 <label>Date Of Birth</label>
-                                <form:input type="text" path="dob" class="form-control date" placeholder="15/03/1993"/>
+                                <form:input type="text" path="dob" class="form-control date" placeholder=""/>
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="inputGroup">
-                                <label>Blood Group</label>
+                                <label>Blood Group*</label>
                                 <form:select path="bloodGroup"  id="bloodGroup" class="form-control">
                                    <!--  <option value="male">A1+</option> -->
 									 <form:options items="${bloodgrp}" />
@@ -179,7 +179,7 @@
                     -->
                      <button type="submit" class="btn btn-primary ml-auto mr-10" id="btn-submit" name="submit">Save Changes</button>
           			
-                     <a href="#" class="btn btn-primary"><span>Back</span> </a>
+                
                 </div>
                 </form:form>
             </div>
@@ -188,6 +188,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/jsp/patient/js/jquery.nicescroll.min.js"></script>
+    <script src="${pageContext.request.contextPath}/jsp/doctor/js/bootstrap-datepicker.min.js"></script>
+   
     <script src="${pageContext.request.contextPath}/jsp/patient/js/app.js"></script>
     <script>
         $(function () {

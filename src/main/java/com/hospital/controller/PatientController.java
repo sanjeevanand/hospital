@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.hospital.jpa.AddressRepository;
 import com.hospital.jpa.PatientRepository;
 import com.hospital.model.Patient;
+import com.hospital.util.HospitalUtil;
 
 @Controller
 @RequestMapping("/patient")
@@ -29,6 +32,9 @@ public class PatientController {
 
 	@Autowired
 	AddressRepository addressRepository;
+	
+	@Autowired
+	private JavaMailSender javaMailSender;
 
 	@GetMapping("/")
 	public String homepage(HttpServletRequest request) {
@@ -45,7 +51,12 @@ public class PatientController {
 		System.out.println("path=/admin/loginSubmit");
 		String mobile = req.getParameter("mobile");
 		String pswd = req.getParameter("pwd");
-		Patient user = patientRepository.findByMobile(mobile);
+		Patient user = null;
+		if (HospitalUtil.isEmail(mobile)) {
+			user = patientRepository.findByEmail(mobile);
+		} else {
+			user = patientRepository.findByMobile(mobile);
+		}
 		if (user != null) {
 			Patient sessionPatient = (Patient) req.getSession().getAttribute("userPatient");
 
@@ -93,13 +104,24 @@ public class PatientController {
 
 	@PostMapping("forgotsubmit")
 	public String forgotsubmit(HttpServletRequest req, Model model) {
-		System.out.println("path=/admin/resetAction");
+		System.out.println("path=/admin/forgotsubmit");
 		String email = req.getParameter("email");
 		// String pswd = req.getParameter("pswd");
-
-		Patient user = patientRepository.findByMobile(email);
+		int ctr = 0;
+		Patient user = null;
+		if (null != email) {
+			if (HospitalUtil.isEmail(email)) {
+				user = patientRepository.findByEmail(email);
+				ctr = 1;
+			} else {
+				user = patientRepository.findByMobile(email);
+				ctr = 2;
+			}
+		}
 		if (null != user) {
 			model.addAttribute("msg", "reset link sent to mobile");
+			
+			sendOtp(user,ctr,req.getRemoteAddr());
 			return "forgotPasswordp";
 		} else {
 			model.addAttribute("msg", "Invalid Mobile No.");
@@ -108,13 +130,25 @@ public class PatientController {
 
 	}
 
-	@GetMapping("reset/{mobile}")
+	@GetMapping("reset/{mobile:.+}")
 	public String reset(@PathVariable String mobile, HttpServletRequest req, Model m) {
 		System.out.println("path=/admin/reset");
 		// String email= req.getParameter("txtEmail");
-		Patient user = patientRepository.findByMobile(mobile);
+		 Patient user = null;
+		 int ctr = 0;
+		if (HospitalUtil.isEmail(mobile)) {
+			user = patientRepository.findByEmail(mobile);
+			ctr = 1;
+		} else {
+			user = patientRepository.findByMobile(mobile);
+			ctr = 2;
+		}
+	//	Patient user = patientRepository.findByMobile(mobile);
 		if (null != user) {
-			m.addAttribute("mobile", user.getMobile());
+			if(ctr==1)
+			m.addAttribute("mobile", user.getEmail());
+			else
+				m.addAttribute("mobile", user.getMobile());
 
 			return "resetPasswordp";
 		} else {
@@ -132,7 +166,16 @@ public class PatientController {
 		String mobile = req.getParameter("mobile");
 		// String pswd = req.getParameter("pswd");
 		if(pass.equals(repass)){
-		Patient user = patientRepository.findByMobile(mobile);
+			 Patient user = null;
+			 int ctr = 0;
+			if (HospitalUtil.isEmail(mobile)) {
+				user = patientRepository.findByEmail(mobile);
+				ctr = 1;
+			} else {
+				user = patientRepository.findByMobile(mobile);
+				ctr = 2;
+			}
+	//	Patient user = patientRepository.findByMobile(mobile);
 		if (null != user) {
 			model.addAttribute("msg", "reset link sent to mobile");
 			user.setPassword(pass);
@@ -189,7 +232,7 @@ public class PatientController {
 		patientRepository.save(patient);	
 		req.getSession().setAttribute("userPatient", patient);
 		m.addAttribute("msg", "Record inserted !");
-		return "profilep";
+		return "redirect:/patient/profile";
 		}
 	}
 	
@@ -243,6 +286,20 @@ public class PatientController {
 		request.getSession().invalidate();
 		return "redirect:/patient/";
 	}
-	
+	void sendOtp(Patient patient,int ctr,String url) {
+
+        SimpleMailMessage msg = new SimpleMailMessage();
+        msg.setTo(""+patient.getEmail());
+
+        msg.setSubject("Welcome mail from DigiKlinik");
+        if(ctr==1)
+        msg.setText("http://localhost/patient/reset/"+patient.getEmail());
+        else
+        	  msg.setText("http://localhost/patient/reset/"+patient.getMobile());
+
+        
+        javaMailSender.send(msg);
+
+    }
 	
 }
