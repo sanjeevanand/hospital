@@ -31,7 +31,7 @@
 	<section class="dataContainer">
 		<div class="pageHeader">
 			<h1>Profile</h1>
-			<button class="btn btn-primary ml-auto">Save Changes</button>
+			
 		</div>
 		<div class="dataSection">
 
@@ -62,7 +62,7 @@
 							<h1>Awards and Recognitions</h1>
 							<div class="inputGroup">
 								<input id="Awards" type="text" class="form-control"
-									placeholder="Recognized by Indian Dental Council of India - 2006">
+									placeholder="Enter Your Awards and Recognitions">
 							</div>
 						</div>
 						<button id="addAwards" class="btn btn-primary  mb-10 ml-auto">Add</button>
@@ -98,7 +98,7 @@
 							<h1>Memberships</h1>
 							<div class="inputGroup">
 								<input id="Memberships" type="text" class="form-control"
-									placeholder="Indian Academy of Oral Medicine and Radiology">
+									placeholder="Enter Your Memberships">
 							</div>
 						</div>
 						<button id="addMemberships" class="btn btn-primary  mb-10 ml-auto">Add</button>
@@ -134,7 +134,7 @@
 			</div>
 
 			<div class="text-center mb-10 mt-20">
-				<a href="#" class="btn btn-primary ml-auto mr-10"><span>Update</span>
+				<a href="#" class="btn btn-primary ml-auto mr-10"><span>Save Changes</span>
 				</a> <a href="#" class="btn btn-primary"><span>Cancel</span> </a>
 			</div>
 		</div>

@@ -25,7 +25,7 @@
     <section class="dataContainer">
         <div class="pageHeader">
             <h1>Profile</h1>
-            <button class="btn btn-primary ml-auto">Save Changes</button>
+            
         </div>
         <div class="dataSection">
 
@@ -60,24 +60,24 @@
                         <div class="col-sm-6">
                             <div class="inputGroup">
                                 <label>Registration Number*</label>
-                                <input type="text" id="regNo" class="form-control" placeholder="Registration Number">
+                                <input type="text" id="regNo" class="form-control" value="${userDoctor.regNo }" placeholder="Registration Number">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="inputGroup">
                                 <label>Registration year*</label>
-                                <input type="text" id="regYear" class="form-control" placeholder="Registration year">
+                                <input type="text" id="regYear" class="form-control" value="${userDoctor.regYear }" placeholder="Registration year">
                             </div>
                         </div>
                     </div>
                     <hr class="m-0">
                     <div class="filterSection" id="filter">
 
-                        <button id="regdocUpdate" class="btn btn-primary  mb-10 ml-auto">Add Files</button>
+                        <button id="regdocUpdate" class="btn btn-primary  mb-10 ml-auto">Save Changes</button>
                     </div>
                     <hr class="m-0">
 
-                    <table class="themeTable">
+                   <%--  <table class="themeTable">
                         <tbody>
                             <tr>
                                 <td>Registration No</td>
@@ -105,7 +105,7 @@
 
 
                         </tbody>
-                    </table>
+                    </table> --%>
                   
                 </div>
             </div>

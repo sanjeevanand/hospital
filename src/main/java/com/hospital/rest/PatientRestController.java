@@ -55,9 +55,9 @@ public class PatientRestController {
 			if (ctr == 1) {
 				patient.setEmail(patient.getMobile());
 				patient.setMobile("");
-
 			}
 			Patient stored = patientRepository.save(patient);
+			if(ctr==1)
 			sendEmail(stored);
 			return stored;
 		} else {

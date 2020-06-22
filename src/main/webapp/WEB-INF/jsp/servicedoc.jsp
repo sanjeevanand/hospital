@@ -24,36 +24,36 @@
 </head>
 
 <body>
-	<jsp:include page="header_p.jsp" />
+	<jsp:include page="header_d.jsp" />
 
 	<jsp:include page="navbar_d.jsp" />
 
 	 <section class="dataContainer">
         <div class="pageHeader">
             <h1>Profile</h1>
-            <button class="btn btn-primary ml-auto">Save Changes</button>
+           
         </div>
         <div class="dataSection">
 
             <ul class="progressTabs">
                 <li>
-                    <a href="profile.html" class="completedProgress">Personal & <br />
+                    <a href="profile" class="completedProgress">Personal & <br />
                         Contact Details</a>
                 </li>
                 <li>
-                    <a href="registration.html" class="completedProgress">Registration & <br />
+                    <a href="registration" class="completedProgress">Registration & <br />
                         Documents</a>
                 </li>
                 <li>
-                    <a href="experience.html" class="completedProgress">Experience &<br />
+                    <a href="experience" class="completedProgress">Experience &<br />
                         Education</a>
                 </li>
                 <li>
-                    <a href="services.html" class="activeProgress">Services<br />
+                    <a href="services" class="activeProgress">Services<br />
                         Details</a>
                 </li>
                 <li>
-                    <a href="awards.html">
+                    <a href="awards">
                         Awards &<br />
                         Memberships
                     </a>
@@ -63,192 +63,91 @@
 
 
             <div class="row">
-                <div class="col-sm-6">
+               <div class="col-sm-6">
                     <div class="filterSection" id="filter">
-                        <h1>
-                            Services
-                        </h1>
-						<select name="serviceMaster">
-						<option>Select Services</option>
-							<c:forEach items="${serviceMasterList}" var="serviceMaster">
-								<option value="${serviceMaster.service}">${serviceMaster.service}</option>
-							</c:forEach>
-						</select> 
-                        <a href="#" class="btn btn-primary  mb-10 ml-auto">Add New</a>
-                    </div>
-                    <hr class="m-0">
-
-                    <table class="themeTable">
-                        <tbody>
-                            <tr>
-                                <td>Artificial Teeth</td>
-                                <td class="text-right">
-
-                                    <a href="#" class="mr-5">
-                                        <img src="images/editIcon.png" alt="">
-                                    </a>
-                                    <a href="#" class="mr-5">
-                                        <img src="images/deleteIcon.png" alt="">
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Crowns and Bridges Fixing</td>
-                                <td class="text-right">
-
-                                    <a href="#" class="mr-5">
-                                        <img src="images/editIcon.png" alt="">
-                                    </a>
-                                    <a href="#" class="mr-5">
-                                        <img src="images/deleteIcon.png" alt="">
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Crowns and Bridges Fixin</td>
-                                <td class="text-right">
-
-                                    <a href="#" class="mr-5">
-                                        <img src="images/editIcon.png" alt="">
-                                    </a>
-                                    <a href="#" class="mr-5">
-                                        <img src="images/deleteIcon.png" alt="">
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Conservative Dentistry</td>
-                                <td class="text-right">
-
-                                    <a href="#" class="mr-5">
-                                        <img src="images/editIcon.png" alt="">
-                                    </a>
-                                    <a href="#" class="mr-5">
-                                        <img src="images/deleteIcon.png" alt="">
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Forensic Odontology</td>
-                                <td class="text-right">
-
-                                    <a href="#" class="mr-5">
-                                        <img src="images/editIcon.png" alt="">
-                                    </a>
-                                    <a href="#" class="mr-5">
-                                        <img src="images/deleteIcon.png" alt="">
-                                    </a>
-                                </td>
-                            </tr>
-
-
-
-                        </tbody>
-                    </table>
-                </div>
-                <div class="col-sm-6">
-                    <div class="filterSection" id="filter">
+                     <div class="col-sm-10">
                         <h1>
                             Specialization
                         </h1>
-						<select name="specializationMaster">
+						<select name="specializationMaster" id="specializationMaster" class="form-control">
 							<option>Select Specialization</option>
 							<c:forEach items="${specializationMasterList}" var="specializationMaster">
-								<option value="${specializationMaster.specialization}">${specializationMaster.specialization}</option>
+								<option value="${specializationMaster.speciality}">${specializationMaster.speciality}</option>
 							</c:forEach>
 						</select> 
-                        <a href="#" class="btn btn-primary  mb-10 ml-auto">Add New</a>
+						</div>
+                        <button id="specializationDoctorDocUpdate" class="btn btn-primary  mb-10 ml-auto">Add</button>
                     </div>
                     <hr class="m-0">
 
                     <table class="themeTable">
                         <tbody>
-
+                         <c:forEach var="specializationDoctor" items="${specializationDoctorList}">
+                        
+                        <c:url var="deleteLink" value="/rest/deleteSpecializationDoctorDoc/${specializationDoctor.specialization}">
+					  </c:url>
                             <tr>
+                                <td>${specializationDoctor.specialization}</td>
+                                <td class="text-right">
 
-                                <td width="70%">Dentist</td>
-
-
-                                <td class="text-right" width="30%">
-
-                                    <a href="#" class="mr-5">
-                                        <img src="images/editIcon.png" alt="">
-                                    </a>
-                                    <a href="#" class="mr-5">
-                                        <img src="images/deleteIcon.png" alt="">
+                                   
+                                    <a href="${deleteLink }" class="mr-5">
+                                        <img src="${pageContext.request.contextPath}/jsp/doctor/images/deleteIcon.png" alt="">
                                     </a>
                                 </td>
                             </tr>
-                            <tr>
-
-                                <td width="70%">Dental Surgeon</td>
-
-
-                                <td class="text-right" width="30%">
-
-                                    <a href="#" class="mr-5">
-                                        <img src="images/editIcon.png" alt="">
-                                    </a>
-                                    <a href="#" class="mr-5">
-                                        <img src="images/deleteIcon.png" alt="">
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-
-                                <td width="70%">Cosmetic/Aesthetic Dentist</td>
-
-
-                                <td class="text-right" width="30%">
-
-                                    <a href="#" class="mr-5">
-                                        <img src="images/editIcon.png" alt="">
-                                    </a>
-                                    <a href="#" class="mr-5">
-                                        <img src="images/deleteIcon.png" alt="">
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-
-                                <td width="70%">Implantologist</td>
-
-
-                                <td class="text-right" width="30%">
-
-                                    <a href="#" class="mr-5">
-                                        <img src="images/editIcon.png" alt="">
-                                    </a>
-                                    <a href="#" class="mr-5">
-                                        <img src="images/deleteIcon.png" alt="">
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-
-                                <td width="70%">Oral Medicine and Radiology</td>
-
-
-                                <td class="text-right" width="30%">
-
-                                    <a href="#" class="mr-5">
-                                        <img src="images/editIcon.png" alt="">
-                                    </a>
-                                    <a href="#" class="mr-5">
-                                        <img src="images/deleteIcon.png" alt="">
-                                    </a>
-                                </td>
-                            </tr>
-
-
+                           </c:forEach>
+							
 
                         </tbody>
                     </table>
                 </div>
               
-            </div>
+            
+                <div class="col-sm-6">
+                    <div class="filterSection" id="filter">
+                    <div class="col-sm-10">
+                        <h1>
+                            Services
+                        </h1>
+						<select name="serviceMaster" id="serviceMaster" class="form-control">
+						<option>Select Services</option>
+							<c:forEach items="${serviceMasterList}" var="serviceMaster">
+								<option value="${serviceMaster.service}">${serviceMaster.service}</option>
+							</c:forEach>
+						</select> 
+						</div>
+                       <button id="serviceDoctorDocUpdate" class="btn btn-primary  mb-10 ml-auto">Add</button>
+                    </div>
+                    <hr class="m-0">
+
+                    <table class="themeTable">
+                        <tbody>
+                       			 <c:forEach var="serviceDoctor" items="${serviceDoctorList}">
+                        
+                        <c:url var="deleteLink" value="/rest/deleteServiceDoctorDoc/${serviceDoctor.service}">
+					  </c:url>
+                            <tr>
+
+                                <td width="70%">${serviceDoctor.service}</td>
+
+
+                                <td class="text-right" width="30%">
+
+                                   
+                                    <a href="${deleteLink }" class="mr-5">
+                                        <img src="${pageContext.request.contextPath}/jsp/doctor/images/deleteIcon.png" alt="">
+                                    </a>
+                                </td>
+                            </tr>
+                        
+						</c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+             </div>
             <div class="text-center mt-20">
-                <a href="#" class="btn btn-primary ml-auto mr-10"><span>Update</span> </a>
+                <a href="#" class="btn btn-primary ml-auto mr-10"><span>Save Changes</span> </a>
                 <a href="#" class="btn btn-primary"><span>Cancel</span> </a>
             </div>
 

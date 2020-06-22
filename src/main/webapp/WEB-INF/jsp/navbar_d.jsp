@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+z<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
  <section class="navigation">
         <ul>
@@ -10,7 +10,7 @@
                 </a>
             </li>
             <li>
-                <a href="myPatients">
+                <a href="#">
                     <img src="${pageContext.request.contextPath}/jsp/doctor/images/menuIcons/patient.png">
                     <span class="menuText">My Patients</span>
 

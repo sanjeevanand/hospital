@@ -20,19 +20,16 @@
             <h1>My Hospitals</h1>
             <ul>
                 <li>
-                    <a href="#">
-                        Doctor Appointments
-                    </a>
+                   <a href="http://ec2-18-223-25-107.us-east-2.compute.amazonaws.com/web/doctorsList.html">Doctor Appointments</a>
                 </li>
                 <li>
-                    <a href="#">
-                        For Doctors
-                    </a>
+                    <a href="#">Lab Tests</a>
                 </li>
                 <li>
-                    <a href="/patient/" class="loginActiveMenu">
-                        Login/Signup
-                    </a>
+                    <a href="http://ec2-18-223-25-107.us-east-2.compute.amazonaws.com/doctor/">For Doctors</a>
+                </li>
+                <li>
+                    <a href="http://ec2-18-223-25-107.us-east-2.compute.amazonaws.com/patient/">Login/Signup</a>
                 </li>
             </ul>
         </div>
@@ -78,14 +75,14 @@
                 <form>
                     <label for="">Full Name</label>
                     <input type="text" name="" id="name" placeholder="Enter Full Name" class="form-control mb-15">
-                    <label for="">Mobile</label>
-                    <div class="row mb-15">
-                        <div class="col-xs-3">
+                    <label for="">Mobile Number / Email ID </label>
+                     <div class="row mb-15">
+                     <!--   <div class="col-xs-3">
                             <select name="" id="" class="form-control">
                                 <option value="">+91</option>
                             </select>
-                        </div>
-                        <div class="col-xs-9">
+                        </div> -->
+                        <div class="col-xs-12">
                             <input type="text" name="" id="mobile" placeholder="Enter Mobile" class="form-control">
                         </div>
                     </div>

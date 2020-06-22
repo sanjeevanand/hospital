@@ -25,7 +25,7 @@
    <section class="dataContainer">
         <div class="pageHeader">
             <h1>Profile</h1>
-            <button class="btn btn-primary ml-auto">Save Changes</button>
+            
         </div>
         <div class="dataSection">
 
@@ -65,7 +65,7 @@
                             Experience
                         </h1>
                             <div class="inputGroup">
-                                <input id ="workExperience" type="text" class="form-control" placeholder="Recognized by Indian Dental Council of India - 2006">
+                                <input id ="workExperience" type="text" class="form-control" placeholder="Enter Experience">
                             </div>
                         </div>
                         <button id="workExperienceDocUpdate" class="btn btn-primary  mb-10 ml-auto">Add</button>
@@ -95,22 +95,7 @@
                                 </td>
                             </tr>
                             </c:forEach>
-                            <tr>
-
-                                <td>2006 - 2016 Chief Consultant at 32 Smiles
-                                    Multispecialty Dental Clinic</td>
-
-
-                                <td class="text-right">
-
-                                    <a href="#" class="mr-5">
-                                        <img src="${pageContext.request.contextPath}/jsp/doctor/images/editIcon.png" alt="">
-                                    </a>
-                                    <a href="#" class="mr-5">
-                                        <img src="${pageContext.request.contextPath}/jsp/doctor/images/deleteIcon.png" alt="">
-                                    </a>
-                                </td>
-                            </tr>
+                           
                            
                         </tbody>
                     </table>
@@ -123,7 +108,7 @@
                             Education
                         </h1>
                             <div class="inputGroup">
-                                <input id ="education" type="text" class="form-control" placeholder="Recognized by Indian Dental Council of India - 2006">
+                                <input id ="education" type="text" class="form-control" placeholder="Enter Education">
                             </div>
                         </div>
                         <button id="educationDocUpdate" class="btn btn-primary  mb-10 ml-auto">Add</button>

@@ -99,4 +99,36 @@ $(function(){
                 }
              );
     });
+    
+    
+    $('#serviceDoctorDocUpdate').click(function(e){
+    	var service = $("#serviceMaster option:selected").text();
+    	$.post( 
+                "/rest/serviceDoctorDoc",
+                {"service": service},
+                function(data) {
+                	 if(data){
+                		// alert(data);
+						 $(location).attr('href',"/doctor/services");
+					 }else{
+						 alert("Invalid ");
+					 }
+                }
+             );
+    });
+    $('#specializationDoctorDocUpdate').click(function(e){
+    	var specialization = $("#specializationMaster option:selected").text();
+    	$.post( 
+                "/rest/specializationDoctorDoc",
+                {"specialization": specialization},
+                function(data) {
+                	 if(data){
+                		// alert(data);
+						 $(location).attr('href',"/doctor/services");
+					 }else{
+						 alert("Invalid ");
+					 }
+                }
+             );
+    });
 })

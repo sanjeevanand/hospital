@@ -10,14 +10,14 @@
                 </a>
             </li>
             <li>
-                <a href="/patient/medical_record">
+                <a href="#">
                     <img src="${pageContext.request.contextPath}/jsp/patient/images/menuIcons/report.png">
                     <span class="menuText">My medical Records</span>
 
                 </a>
             </li>
             <li>
-                <a href="/patient/lab_test">
+                <a href="#">
                     <img src="${pageContext.request.contextPath}/jsp/patient/images/menuIcons/lab.png">
                     <span class="menuText">Lab Test</span>
 

@@ -39,7 +39,7 @@
         </div>
         <div class="dataSection">
             <div id="scrollTable" style="max-height: 300px; overflow: hidden; outline: none;" tabindex="5000">
-                <table class="themeTable" style="min-width: 1203px;">
+                <table class="themeTable" style="min-width: 100%;">
               
                     <tr>
                         <th width="80%">Speciality Name</th>
@@ -54,9 +54,9 @@
                         <td>${master.speciality}</td>
 
                         <td class="text-right">
-                            <a href="#">
+                            <%-- <a href="#">
                                 <img src="${pageContext.request.contextPath}/jsp/admin/images/editIcon.png" class="mr-5" alt="">
-                            </a>
+                            </a> --%>
                             <a href="#">
                                 <img src="${pageContext.request.contextPath}/jsp/admin/images/activeIcon.png" class="mr-5" alt="">
                             </a>
@@ -66,52 +66,7 @@
                         </td>
                     </tr>
                      </c:forEach>
-                    <tr>
-                        <td>Dentist</td>
-
-                        <td class="text-right">
-                            <a href="#">
-                                <img src="${pageContext.request.contextPath}/jsp/admin/images/editIcon.png" class="mr-5" alt="">
-                            </a>
-                            <a href="#">
-                                <img src="${pageContext.request.contextPath}/jsp/admin/images/activeIcon.png" class="mr-5" alt="">
-                            </a>
-                            <a href="#">
-                                <img src="${pageContext.request.contextPath}/jsp/admin/images/deleteIcon.png" alt="">
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Cardiologist</td>
-
-                        <td class="text-right">
-                            <a href="#">
-                                <img src="${pageContext.request.contextPath}/jsp/admin/images/editIcon.png" class="mr-5" alt="">
-                            </a>
-                            <a href="#">
-                                <img src="${pageContext.request.contextPath}/jsp/admin/images/activeIcon.png" class="mr-5" alt="">
-                            </a>
-                            <a href="#">
-                                <img src="${pageContext.request.contextPath}/jsp/admin/images/deleteIcon.png" alt="">
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Radiologist</td>
-
-                        <td class="text-right">
-                            <a href="#">
-                                <img src="${pageContext.request.contextPath}/jsp/admin/images/editIcon.png" class="mr-5" alt="">
-                            </a>
-                            <a href="#">
-                                <img src="${pageContext.request.contextPath}/jsp/admin/images/activeIcon.png" class="mr-5" alt="">
-                            </a>
-                            <a href="#">
-                                <img src="${pageContext.request.contextPath}/jsp/admin/images/deleteIcon.png" alt="">
-                            </a>
-                        </td>
-                    </tr>
-
+                  
 
 
 

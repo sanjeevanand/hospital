@@ -34,7 +34,7 @@ public class Patient implements Serializable{
 	private String name;
 	@Column
     private String email;
-	@Column(unique = true)
+	@Column//(unique = true)
     private String mobile;
 	
 	public void setPatientId(int patientId) {

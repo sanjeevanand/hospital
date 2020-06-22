@@ -2,6 +2,7 @@ package com.hospital.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,6 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
@@ -43,7 +46,11 @@ public class Doctor implements Serializable{
 	@Column
     private String dob;
 	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date created_at; 
 	
+	
+
 	@Column//(unique = true)
     private String mobile;
 	
@@ -274,7 +281,13 @@ public class Doctor implements Serializable{
 		this.status = status;
 	}
 
-	
+	public Date getCreated_at() {
+		return created_at;
+	}
+
+	public void setCreated_at(Date created_at) {
+		this.created_at = created_at;
+	}
 	@OneToMany(fetch=FetchType.LAZY,
 			   cascade= {CascadeType.PERSIST, CascadeType.MERGE,
 						 CascadeType.DETACH, CascadeType.REFRESH})
@@ -288,7 +301,21 @@ public class Doctor implements Serializable{
 	@JoinColumn(name="doctor_id")
 	@JsonIgnore
 	private List<Education> educationList;
-
+	
+	@OneToMany(fetch=FetchType.LAZY,
+			   cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+						 CascadeType.DETACH, CascadeType.REFRESH})
+	@JoinColumn(name="doctor_id")
+	@JsonIgnore
+	private List<ServiceDoctor> serviceDoctorList;
+	
+	@OneToMany(fetch=FetchType.LAZY,
+			   cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+						 CascadeType.DETACH, CascadeType.REFRESH})
+	@JoinColumn(name="doctor_id")
+	@JsonIgnore
+	private List<SpecializationDoctor> specializationDoctorList;
+	
 	@OneToMany(fetch=FetchType.LAZY,
 			   cascade= {CascadeType.PERSIST, CascadeType.MERGE,
 						 CascadeType.DETACH, CascadeType.REFRESH})
@@ -319,6 +346,22 @@ public class Doctor implements Serializable{
 		this.educationList = educationList;
 	}
 	
+	public List<ServiceDoctor> getServiceDoctorList() {
+		return serviceDoctorList;
+	}
+
+	public void setServiceDoctorList(List<ServiceDoctor> serviceDoctorList) {
+		this.serviceDoctorList = serviceDoctorList;
+	}
+
+	public List<SpecializationDoctor> getSpecializationDoctorList() {
+		return specializationDoctorList;
+	}
+
+	public void setSpecializationDoctorList(List<SpecializationDoctor> specializationDoctorList) {
+		this.specializationDoctorList = specializationDoctorList;
+	}
+
 	public List<Awards> getAwardsList() {
 		return awardsList;
 	}
@@ -359,4 +402,18 @@ public class Doctor implements Serializable{
 		}
 		this.membershipList.add(membership);
 	}
+	public void addServiceDoctorList(ServiceDoctor serviceDoctor){
+		if(this.serviceDoctorList==null){
+			this.serviceDoctorList = new ArrayList<>();
+		}
+		this.serviceDoctorList.add(serviceDoctor);
+	}
+	
+	public void addspecializationDoctorList(SpecializationDoctor specializationDoctor){
+		if(this.specializationDoctorList==null){
+			this.specializationDoctorList = new ArrayList<>();
+		}
+		this.specializationDoctorList.add(specializationDoctor);
+	}
+	
 }

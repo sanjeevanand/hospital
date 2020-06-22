@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,7 +22,7 @@
    <jsp:include page="navbar_dashboard.jsp" />
         <section class="dataContainer">
         <div class="pageHeader">
-            <h1>Docters</h1>
+            <h1>Doctors</h1>
             <a href="#" data-toggle="tooltip" data-placement="bottom" title="Show or hide filter section"
                 id="filterIcon" class="btn btn-primary ml-auto mr-10"><img src="${pageContext.request.contextPath}/jsp/admin/images/filterIcon.png"
                     class="mr-10" /><span>Filter</span> </a>
@@ -56,7 +57,7 @@
         </section>
         <div class="dataSection">
 
-            <section class="paginationSec">
+           <%--  <section class="paginationSec">
 
                 <p>Total Records: <span>200</span></p>
                 <select class="form-control ml-auto" style="max-width: 200px;">
@@ -72,34 +73,39 @@
                     <img src="${pageContext.request.contextPath}/jsp/admin/images/nextIcon.png" alt="">
                 </a>
 
-            </section>
+            </section> --%>
             <div id="scrollTable" style="max-height:300px;">
-                <table class="themeTable" style="min-width: 1203px;">
+                <table class="themeTable" style="min-width: 100%;">
                     <tr>
                         <th width="10%">Doctor Id</th>
                         <th width="20%">Doctor Name</th>
                         <th width="10%">Speciality</th>
                         <th width="15%">Created Date</th>
                         <th width="10%">Location</th>
-                        <th width="10%">Type</th>
+                      <!--   <th width="10%">Type</th>
                         <th width="10%">Amount</th>
                         <th width="10%">Action</th>
-
+ -->
                     </tr>
+                    
+                     <c:forEach var="doctor" items="${doctorList}">
+                        
+                        <c:url var="deleteLink" value="">
+					  </c:url>
                     <tr>
-                        <td>MYD01</td>
+                        <td>MYD${doctor.doctorId}</td>
                         <td>
                             <div class="profileSec">
                                 <div class="tableProfile">
                                     <img src="${pageContext.request.contextPath}/jsp/admin/images/profile.jpg">
                                 </div>
-                                <a href="doctor">Dr. Maria Lupin James</a>
+                                <a href="${doctor.firstname}">${doctor.firstname}</a>
                             </div>
                         </td>
                         <td>Dental</td>
-                        <td>May 10, 2020</td>
-                        <td>Bangalore</td>
-                        <td>Online Consult</td>
+                        <td>${doctor.created_at}</td>
+                        <td>${doctor.location}</td>
+                       <%--  <td>Online Consult</td>
                         <td>300</td>
 
                         <td>
@@ -109,35 +115,10 @@
                             <a href="#">
                                 <img src="${pageContext.request.contextPath}/jsp/admin/images/deleteIcon.png" alt="">
                             </a>
-                        </td>
+                        </td> --%>
                     </tr>
-
-                    <tr>
-                        <td>MYD01</td>
-                        <td>
-                            <div class="profileSec">
-                                <div class="tableProfile">
-                                    <img src="${pageContext.request.contextPath}/jsp/admin/images/profile.jpg">
-                                </div>
-                                <a href="doctor">Dr. Maria Lupin James</a>
-                            </div>
-                        </td>
-                        <td>Dental</td>
-                        <td>May 10, 2020</td>
-                        <td>Bangalore</td>
-                        <td>Online Consult</td>
-                        <td>300</td>
-
-                        <td>
-                            <a href="#">
-                                <img src="${pageContext.request.contextPath}/jsp/admin/images/inActiveIcon.png" class="mr-5" alt="">
-                            </a>
-                            <a href="#">
-                                <img src="${pageContext.request.contextPath}/jsp/admin/images/deleteIcon.png" alt="">
-                            </a>
-                        </td>
-                    </tr>
-
+			</c:forEach>
+                   
 
                 </table>
             </div>

@@ -9,7 +9,7 @@
             <img src="${pageContext.request.contextPath}/jsp/patient/images/bell.png">
         </a>
         <p>Welcome
-            <span>${patientUser.name}</span>
+            <span>${userPatient.name}</span>
         </p>
         <div class="profileImage">
             <img src="${pageContext.request.contextPath}/jsp/patient/images/profile.jpg">

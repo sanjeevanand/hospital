@@ -59,7 +59,7 @@
                     <div class="inputGroup">
                         <label>Confirm Password</label>
                         <input name="newRepassword" type="password" class="form-control" placeholder="Confirm Password">
-                    	>
+                    	
                     </div>
                 </div>
             </div>

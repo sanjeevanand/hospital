@@ -1,6 +1,7 @@
 package com.hospital.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -18,11 +19,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.hospital.jpa.DoctorRepository;
 import com.hospital.jpa.MasterRepository;
 import com.hospital.jpa.OtpRepository;
+import com.hospital.jpa.PatientRepository;
 import com.hospital.jpa.RegistrationRepository;
 import com.hospital.jpa.ServiceMasterRepository;
 import com.hospital.jpa.SpecializationMasterRepository;
 import com.hospital.model.Doctor;
+import com.hospital.model.Master;
 import com.hospital.model.Registration;
+import com.hospital.model.ServiceMaster;
 
 @Controller
 @RequestMapping("/admin")
@@ -34,6 +38,8 @@ public class AdminContoller {
 
 	@Autowired
 	private OtpRepository otpRepository;
+	@Autowired
+	private PatientRepository patientRepository;
 	
 	@Autowired
 	DoctorRepository doctorRepository;
@@ -75,7 +81,8 @@ public class AdminContoller {
 				if (user.getStatus().equals("admin"))// CKConstant.STATUS_EMAIL))
 				{
 					System.out.println("path=/admin/success");
-					m.addAttribute("patient", 0);//PatientRepository.count());
+					m.addAttribute("patient", patientRepository.count());
+					m.addAttribute("doctor", doctorRepository.count());
 					return "dashboard_admin";
 				} else {
 					System.out.println("path=/admin/lock");
@@ -108,7 +115,10 @@ public class AdminContoller {
 	   return "appointments";
    }
   @GetMapping("doctorslist")	
-  public String doctorslist() {
+  public String doctorslist(Model m) {
+	  
+	List<Doctor> doctorList =  doctorRepository.findAll();
+	m.addAttribute("doctorList",doctorList);
 	   return "doctorslist";
   }
   @GetMapping("createdocter")	
@@ -155,8 +165,9 @@ public class AdminContoller {
   }
  @GetMapping("/delete/speciality") 
  public String deletedoctersmaster(@RequestParam("selectId") long theId) {
-	  
-	  masterRepository.delete(masterRepository.findByselectId(theId));
+	Optional<Master> master = masterRepository.findById(theId);
+	Master s =master.get();
+	masterRepository.delete(s);
 	   return "redirect:/admin/doctersmaster";
   }
   
@@ -164,9 +175,17 @@ public class AdminContoller {
  public String servicemaster(Model m) {
 	  
 	  List specialityList = serviceMasterRepository.findAll();
-	  m.addAttribute("specialityList",specialityList);
+	  m.addAttribute("servicemasterList",specialityList);
 	   return "servicemaster";
  }
+ 
+ @GetMapping("/delete/servicemaster") 
+ public String deletedoctersServicemaster(@RequestParam("selectId") long theId) {
+	Optional<ServiceMaster> master = serviceMasterRepository.findById(theId);
+	ServiceMaster s =master.get();
+	serviceMasterRepository.delete(s);
+	   return "redirect:/admin/servicemaster";
+  }
  @GetMapping("specializationmaster")	
  public String specializationmaster(Model m) {
 	  
@@ -184,5 +203,10 @@ public class AdminContoller {
   public String createpatients() {
 	   return "createpatients";
   }
-  
+  @GetMapping("/logout")
+	public String destroySession(HttpServletRequest request) {
+		System.out.println("path=/admin/logout");
+		request.getSession().invalidate();
+		return "redirect:/admin/";
+	}
 }

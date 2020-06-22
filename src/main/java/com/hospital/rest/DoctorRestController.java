@@ -29,6 +29,8 @@ import com.hospital.model.Doctor;
 import com.hospital.model.Education;
 import com.hospital.model.Membership;
 import com.hospital.model.Otp;
+import com.hospital.model.ServiceDoctor;
+import com.hospital.model.SpecializationDoctor;
 import com.hospital.model.WorkExperience;
 import com.hospital.util.HospitalUtil;
 
@@ -62,12 +64,14 @@ public class DoctorRestController {
 			System.out.println(otp);
 			// doctor.setAddress(new Address());
 			doctor.addOtpList(new Otp(otp, new Date()));
+			doctor.setCreated_at(new Date());
 			if (ctr == 1) {
 				doctor.setEmail(doctor.getMobile());
 				doctor.setMobile("");
 
 			}
 			Doctor stored = doctorRepository.save(doctor);
+			if (ctr == 1)
 			sendEmail(stored);
 			return stored;
 		} else {
@@ -278,13 +282,92 @@ public class DoctorRestController {
 			response.sendRedirect("/doctor/");
 		}
 	}
+	@PostMapping(value = "/serviceDoctorDoc")
+	public boolean serviceDoctorDoc(HttpServletRequest req, Model m, ServiceDoctor serviceDoctor) {
+
+		Doctor sessionPatient = (Doctor) req.getSession().getAttribute("userDoctor");
+		boolean save = false;
+		if (sessionPatient != null) {
+			Doctor obj = doctorRepository.findByMobile(sessionPatient.getMobile());
+			// obj.setRegNo(doctor.getRegNo());
+			// obj.setRegYear(doctor.getRegYear());
+			obj.addServiceDoctorList(serviceDoctor);
+			req.getSession().setAttribute("userDoctor", obj);
+			save = true;
+		} else {
+			save = false;
+		}
+		return save;
+	}
+	@GetMapping(value = "/deleteServiceDoctorDoc/{service}")
+	public void deleteServiceDoctorDoc(@PathVariable("service") String service,HttpServletRequest req,HttpServletResponse response) throws IOException {
+
+		Doctor sessionPatient = (Doctor) req.getSession().getAttribute("userDoctor");
+		boolean save = false;
+		if (sessionPatient != null) {
+			Doctor obj = doctorRepository.findByMobile(sessionPatient.getMobile());
+		List<ServiceDoctor>	newList = new ArrayList<>();
+		
+			for(ServiceDoctor x : obj.getServiceDoctorList()){
+				if(service.equals(x.getService()))
+				newList.add(x);
+			}
+			obj.getServiceDoctorList().removeAll(newList);
+			doctorRepository.save(obj);
+			req.getSession().setAttribute("userDoctor", obj);
+		response.sendRedirect("/doctor/services");
+		}else {
+			response.sendRedirect("/doctor/");
+		}
+	}
+	@PostMapping(value = "/specializationDoctorDoc")
+	public boolean specializationDoctorDoc(HttpServletRequest req, Model m, SpecializationDoctor specializationDoctor) {
+
+		Doctor sessionPatient = (Doctor) req.getSession().getAttribute("userDoctor");
+		boolean save = false;
+		if (sessionPatient != null) {
+			Doctor obj = doctorRepository.findByMobile(sessionPatient.getMobile());
+			// obj.setRegNo(doctor.getRegNo());
+			// obj.setRegYear(doctor.getRegYear());
+			obj.addspecializationDoctorList(specializationDoctor);
+			req.getSession().setAttribute("userDoctor", obj);
+			save = true;
+		} else {
+			save = false;
+		}
+		return save;
+	}
+	@GetMapping(value = "/deleteSpecializationDoctorDoc/{specialization}")
+	public void deleteSpecializationDoctorDoc(@PathVariable("specialization") String specialization,HttpServletRequest req,HttpServletResponse response) throws IOException {
+
+		Doctor sessionPatient = (Doctor) req.getSession().getAttribute("userDoctor");
+		boolean save = false;
+		if (sessionPatient != null) {
+			Doctor obj = doctorRepository.findByMobile(sessionPatient.getMobile());
+		List<SpecializationDoctor>	newList = new ArrayList<>();
+		
+			for(SpecializationDoctor x : obj.getSpecializationDoctorList()){
+				if(specialization.equals(x.getSpecialization()))
+				newList.add(x);
+			}
+			obj.getSpecializationDoctorList().removeAll(newList);
+			doctorRepository.save(obj);
+			req.getSession().setAttribute("userDoctor", obj);
+		response.sendRedirect("/doctor/services");
+		}else {
+			response.sendRedirect("/doctor/");
+		}
+	}
 	void sendEmail(Doctor doctor) {
 
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setTo(""+doctor.getEmail());
 
         msg.setSubject("Welcome mail from DigiKlinik");
-        msg.setText(doctor.getOtpList().get(0).toString());
+        String msg1 = "your otp is "+doctor.getOtpList().get(0).getOtp();
+        msg.setText(msg1);
+
+
 
         
         javaMailSender.send(msg);

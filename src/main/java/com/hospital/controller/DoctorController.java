@@ -20,10 +20,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hospital.jpa.AddressRepository;
 import com.hospital.jpa.DoctorRepository;
+import com.hospital.jpa.MasterRepository;
 import com.hospital.jpa.ServiceMasterRepository;
 import com.hospital.jpa.SpecializationMasterRepository;
 import com.hospital.jpa.DoctorRepository;
 import com.hospital.model.Doctor;
+import com.hospital.model.ServiceDoctor;
 import com.hospital.model.ServiceMaster;
 import com.hospital.model.SpecializationMaster;
 import com.hospital.util.HospitalUtil;
@@ -41,6 +43,9 @@ public class DoctorController {
 	
 	@Autowired
 	SpecializationMasterRepository specializationMasterRepository;
+	
+	@Autowired
+	private MasterRepository masterRepository;
 	
 	@Autowired
 	AddressRepository addressRepository;
@@ -186,7 +191,7 @@ public class DoctorController {
 			lang.put("Tamil", "Tamil");
 			
 			m.addAttribute("lang", lang);
-			return "profile";
+			return "profiled";
 			
 		}
 		else
@@ -203,6 +208,8 @@ public class DoctorController {
 		Doctor temp =  (Doctor) req.getSession().getAttribute("userDoctor");
 		if(null==doctor.getPassword())
 			doctor.setPassword(temp.getPassword());
+		if(null==doctor.getCreated_at())
+			doctor.setCreated_at(temp.getCreated_at());
 		
 		doctorRepository.save(doctor);	
 		req.getSession().setAttribute("userDoctor", doctor);
@@ -311,11 +318,15 @@ public class DoctorController {
 		Doctor sessionPatient = (Doctor) req.getSession().getAttribute("userDoctor");
 	
 		if (sessionPatient != null) {
+			Doctor doctor =	doctorRepository.findByMobile(sessionPatient.getMobile());
 			m.addAttribute("userDoctor", sessionPatient);
 		List<ServiceMaster>	 serviceMasterList = serviceMasterRepository.findAll();
-		List<SpecializationMaster>	specializationMasterList = specializationMasterRepository.findAll();
+		 List specialityList = masterRepository.findAll();
+		//  m.addAttribute("specialityList",specialityList);
 		m.addAttribute("serviceMasterList",serviceMasterList);	
-		m.addAttribute("specializationMasterList",specializationMasterList);	
+		m.addAttribute("specializationMasterList",specialityList);	
+		m.addAttribute("serviceDoctorList",doctor.getServiceDoctorList());	
+		m.addAttribute("specializationDoctorList",doctor.getSpecializationDoctorList());
 		return "servicedoc";
 		}
 		else {

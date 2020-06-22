@@ -18,21 +18,18 @@
     <div class="loginHeader">
         <div class="headerData">
             <img src="${pageContext.request.contextPath}/jsp/doctor/images/logo.png">
-            <ul>
+             <ul>
                 <li>
-                    <a href="#">
-                        Doctor Appointments
-                    </a>
+                 <a href="http://ec2-18-223-25-107.us-east-2.compute.amazonaws.com/web/doctorsList.html">Doctor Appointments</a>
                 </li>
                 <li>
-                    <a href="#" class="loginActiveMenu">
-                        For Doctors
-                    </a>
+                    <a href="#">Lab Tests</a>
                 </li>
                 <li>
-                    <a href="#" >
-                        Login/Signup
-                    </a>
+                    <a href="http://ec2-18-223-25-107.us-east-2.compute.amazonaws.com/doctor/">For Doctors</a>
+                </li>
+                <li>
+                    <a href="http://ec2-18-223-25-107.us-east-2.compute.amazonaws.com/patient/">Login/Signup</a>
                 </li>
             </ul>
         </div>
@@ -74,15 +71,16 @@
             <div id="registerUser" class="tabSec" style="display: none;">
                 <form>
                     <label for="">Full Name</label>
-                    <input type="text" name="firstname" id="firstname" placeholder="Enter Full Name" class="form-control mb-15">
-                    <label for="">Mobile</label>
+                    <input type="text" name="firstname" id
+                    ="firstname" placeholder="Enter Full Name" class="form-control mb-15">
+                    <label for="">Mobile Number / Email ID </label>
                     <div class="row mb-15">
-                        <div class="col-xs-3">
+                       <!--  <div class="col-xs-3">
                             <select name="" id="" class="form-control">
                                 <option value="">+91</option>
                             </select>
-                        </div>
-                        <div class="col-xs-9">
+                        </div> -->
+                        <div class="col-xs-12">
                             <input type="text" name="mobile" id="mobile" placeholder="Enter Mobile" class="form-control">
                         </div>
                     </div>

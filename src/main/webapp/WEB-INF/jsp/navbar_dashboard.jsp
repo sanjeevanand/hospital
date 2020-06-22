@@ -29,29 +29,29 @@
                         </a>
                     </li>
                     <li>
-                        <a href="createdocter">
+                        <a href="#"><!-- createdocter -->
                             <span class="menuText">Add Doctors</span>
 
                         </a>
                     </li>
                     <li>
                         <a href="doctersmaster">
-                            <span class="menuText">Masters</span>
+                            <span class="menuText">Speciality Master </span>
 
                         </a>
                     </li>
                      <li>
                         <a href="servicemaster">
-                            <span class="menuText">Service</span>
+                            <span class="menuText">Services Master</span>
 
                         </a>
                     </li>
-                    <li>
+                   <!--  <li>
                         <a href="specializationmaster" class="activeMenu">
                             <span class="menuText">Specialization</span>
 
                         </a>
-                    </li>
+                    </li> -->
                 </ul>
             </li>
             <li>
@@ -115,6 +115,15 @@
                     <img src="${pageContext.request.contextPath}/jsp/admin/images/menuIcons/icon8.png">
                     <span class="menuText">Settings</span>
                     <span class="icon">
+                        <img src="${pageContext.request.contextPath}/jsp/admin/images/leftArrow.png">
+                    </span>
+                </a>
+            </li>
+             <li>
+                <a href="logout">
+                    <img src="${pageContext.request.contextPath}/jsp/admin/images/menuIcons/logout.png">
+                    <span class="menuText">Logout</span>
+					<span class="icon">
                         <img src="${pageContext.request.contextPath}/jsp/admin/images/leftArrow.png">
                     </span>
                 </a>

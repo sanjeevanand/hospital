@@ -25,7 +25,7 @@
     <section class="dataContainer">
         <div class="pageHeader">
             <h1>Profile</h1>
-            <button class="btn btn-primary ml-auto">Save Changes</button>
+           <!--  <button class="btn btn-primary ml-auto">Save Changes</button>-->
         </div>
         <div class="dataSection">
 
@@ -99,14 +99,14 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="inputGroup">
-                                <label>Phone</label>
+                                <label>Mobile</label>
                                 <div class="row">
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-4">
                                         <select name="" id="" class="form-control">
                                             <option value="">+91</option>
                                         </select>
                                     </div>
-                                    <div class="col-sm-9">
+                                    <div class="col-sm-8">
                                          <form:input type="text" path="mobile" class="form-control" placeholder=""/>
                                     </div>
                                 </div>
@@ -184,18 +184,18 @@
                         </div>
                     </div>
                     <div class="text-center mb-10">
-                       <button type="submit"  class="btn btn-primary ml-auto mr-10">Update </button>
+                       <button type="submit"  class="btn btn-primary ml-auto mr-10">Save Changes </button>
                         <a href="#" class="btn btn-primary"><span>Cancel</span> </a>
                     </div>
                 </div>
 		</form:form>
-                <div class="col-sm-4">
+                <!--  <div class="col-sm-4">
                     <div class="doctorProfile mb-20">
                         <img src="${pageContext.request.contextPath}/jsp/doctor/images/patientProfile.jpg">
                     </div>
                     <button class="btn btn-primary mr-10">Upload</button>
                     <button class="btn btn-default">Cancel</button>
-                </div>
+                </div>-->
 
             </div>
 

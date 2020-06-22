@@ -52,7 +52,7 @@
                         <td>
                             <div class="profileSec">
                                 <div class="tableProfile">
-                                    <img src="${pageContext.request.contextPath}/images/profile.jpg">
+                                    <img src="${pageContext.request.contextPath}/jsp/patient/images/profile.jpg">
                                 </div>
                                 <a href="doctor.html">Dr. Maria Lupin James</a>
                             </div>

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
@@ -35,6 +36,9 @@ public class PatientController {
 	
 	@Autowired
 	private JavaMailSender javaMailSender;
+	
+	@Value("${hospital.url}")
+	private String hospitalUrl;
 
 	@GetMapping("/")
 	public String homepage(HttpServletRequest request) {
@@ -220,7 +224,7 @@ public class PatientController {
 	}
 	
 	@PostMapping("/savePatient")
-	public String saveVehicle(@Valid @ModelAttribute("patient") Patient patient,BindingResult bResult,Model m,HttpServletRequest req) {
+	public String savePatient(@Valid @ModelAttribute("patient") Patient patient,BindingResult bResult,Model m,HttpServletRequest req) {
 		
 		if(bResult.hasErrors()){
 			return "profilep";
@@ -293,9 +297,9 @@ public class PatientController {
 
         msg.setSubject("Welcome mail from DigiKlinik");
         if(ctr==1)
-        msg.setText("http://localhost/patient/reset/"+patient.getEmail());
+        msg.setText("http://"+hospitalUrl+"/patient/reset/"+patient.getEmail());
         else
-        	  msg.setText("http://localhost/patient/reset/"+patient.getMobile());
+        msg.setText("http://"+hospitalUrl+"/patient/reset/"+patient.getMobile());
 
         
         javaMailSender.send(msg);
