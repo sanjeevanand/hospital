@@ -25,6 +25,7 @@ import com.hospital.jpa.ServiceMasterRepository;
 import com.hospital.jpa.SpecializationMasterRepository;
 import com.hospital.model.Doctor;
 import com.hospital.model.Master;
+import com.hospital.model.Patient;
 import com.hospital.model.Registration;
 import com.hospital.model.ServiceMaster;
 
@@ -102,12 +103,14 @@ public class AdminContoller {
 		}
 	}
 	@GetMapping("/dashboard")
-	public String dashboard(HttpServletRequest request) {
+	public String dashboard(HttpServletRequest request,Model m) {
 		/*
 		 * Registration sessionUser = (Registration)
 		 * request.getSession().getAttribute("user"); if (sessionUser != null) return
 		 * "home"; else return "redirect:/admin/";
 		 */
+		m.addAttribute("patient", patientRepository.count());
+		m.addAttribute("doctor", doctorRepository.count());
 		return "dashboard_admin";
 	}
   @GetMapping("appointments")	
@@ -195,7 +198,9 @@ public class AdminContoller {
  }
   
   @GetMapping("patientslist")	
-  public String patientslist() {
+  public String patientslist(Model m) {
+		List<Patient> patientList =  patientRepository.findAll();
+		m.addAttribute("patientList",patientList);
 	   return "patientslist";
   }
 

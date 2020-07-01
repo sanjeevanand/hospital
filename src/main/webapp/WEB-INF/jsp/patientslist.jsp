@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+      <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -57,7 +58,7 @@
         </section>
         <div class="dataSection">
 
-            <section class="paginationSec">
+           <!--  <section class="paginationSec">
 
                 <p>Total Records: <span>200</span></p>
                 <select class="form-control ml-auto" style="max-width: 200px;">
@@ -73,210 +74,45 @@
                     <img src="images/nextIcon.png" alt="">
                 </a>
 
-            </section>
+            </section> -->
             <div id="scrollTable" style="max-height:300px;">
                 <table class="themeTable" style="min-width: 1203px;">
                     <tr>
                         <th width="10%">Patient Id</th>
                         <th width="20%">Patient Name</th>
-                        <th width="5%">Age</th>
+                      <!--   <th width="5%">Age</th> -->
                         <th width="10%">Location</th>
                         <th width="15%">Phone</th>
                         <th width="20%">Email</th>
-                        <th width="10%">Created Date</th>
-                        <th width="10%">Action</th>
+                   <!--      <th width="10%">Created Date</th>
+                        <th width="10%">Action</th> -->
 
                     </tr>
-                    <tr>
-                        <td>MYD01</td>
+                      <c:forEach var="patient" items="${patientList}">
+                        
+                        <c:url var="deleteLink" value="">
+					  </c:url>
+					   <tr>
+                        <td>MYD${patient.patientId}</td>
                         <td>
                             <div class="profileSec">
                                 <div class="tableProfile">
                                     <img src="${pageContext.request.contextPath}/jsp/admin/images/profile.jpg">
                                 </div>
-                                <a href="patient">Maria Lupin James</a>
+                                <a href="">${patient.name}</a>
                             </div>
                         </td>
-                        <td>27 Yrs</td>
+                        
                        
-                        <td>Bangalore</td>
-                        <td>+91-9742225501</td>
-                        <td><a href="#">yogeshwaranworld@gmail.com</a></td>
-                        <td>May 10, 2020</td>
-                       
-
-                        <td>
-                            <a href="#">
-                                <img src="${pageContext.request.contextPath}/jsp/admin/images/activeIcon.png" class="mr-5" alt="">
-                            </a>
-                            <a href="#">
-                                <img src="${pageContext.request.contextPath}/jsp/admin/images/deleteIcon.png" alt="">
-                            </a>
-                        </td>
+                        <td>${patient.address.houseNo}</td>
+                        <td>${patient.mobile}</td>
+                        <td><a href="#">${patient.email}</a></td>
+                        
                     </tr>
-                    <tr>
-                        <td>MYD01</td>
-                        <td>
-                            <div class="profileSec">
-                                <div class="tableProfile">
-                                    <img src="${pageContext.request.contextPath}/jsp/admin/images/profile.jpg">
-                                </div>
-                                <a href="patient">Maria Lupin James</a>
-                            </div>
-                        </td>
-                        <td>27 Yrs</td>
-                       
-                        <td>Bangalore</td>
-                        <td>+91-9742225501</td>
-                        <td><a href="#">yogeshwaranworld@gmail.com</a></td>
-                        <td>May 10, 2020</td>
-                       
-
-                        <td>
-                            <a href="#">
-                                <img src="${pageContext.request.contextPath}/jsp/admin/images/activeIcon.png" class="mr-5" alt="">
-                            </a>
-                            <a href="#">
-                                <img src="${pageContext.request.contextPath}/jsp/admin/images/deleteIcon.png" alt="">
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>MYD01</td>
-                        <td>
-                            <div class="profileSec">
-                                <div class="tableProfile">
-                                    <img src="${pageContext.request.contextPath}/jsp/admin/images/profile.jpg">
-                                </div>
-                                <a href="patient">Maria Lupin James</a>
-                            </div>
-                        </td>
-                        <td>27 Yrs</td>
-                       
-                        <td>Bangalore</td>
-                        <td>+91-9742225501</td>
-                        <td><a href="#">yogeshwaranworld@gmail.com</a></td>
-                        <td>May 10, 2020</td>
-                       
-
-                        <td>
-                            <a href="#">
-                                <img src="${pageContext.request.contextPath}/jsp/admin/images/activeIcon.png" class="mr-5" alt="">
-                            </a>
-                            <a href="#">
-                                <img src="${pageContext.request.contextPath}/jsp/admin/images/deleteIcon.png" alt="">
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>MYD01</td>
-                        <td>
-                            <div class="profileSec">
-                                <div class="tableProfile">
-                                    <img src="${pageContext.request.contextPath}/jsp/admin/images/profile.jpg">
-                                </div>
-                                <a href="patient">Maria Lupin James</a>
-                            </div>
-                        </td>
-                        <td>27 Yrs</td>
-                       
-                        <td>Bangalore</td>
-                        <td>+91-9742225501</td>
-                        <td><a href="#">yogeshwaranworld@gmail.com</a></td>
-                        <td>May 10, 2020</td>
-                       
-
-                        <td>
-                            <a href="#">
-                                <img src="${pageContext.request.contextPath}/jsp/admin/images/activeIcon.png" class="mr-5" alt="">
-                            </a>
-                            <a href="#">
-                                <img src="${pageContext.request.contextPath}/jsp/admin/images/deleteIcon.png" alt="">
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>MYD01</td>
-                        <td>
-                            <div class="profileSec">
-                                <div class="tableProfile">
-                                    <img src="${pageContext.request.contextPath}/jsp/admin/images/profile.jpg">
-                                </div>
-                                <a href="patient">Maria Lupin James</a>
-                            </div>
-                        </td>
-                        <td>27 Yrs</td>
-                       
-                        <td>Bangalore</td>
-                        <td>+91-9742225501</td>
-                        <td><a href="#">yogeshwaranworld@gmail.com</a></td>
-                        <td>May 10, 2020</td>
-                       
-
-                        <td>
-                            <a href="#">
-                                <img src="${pageContext.request.contextPath}/jsp/admin/images/activeIcon.png" class="mr-5" alt="">
-                            </a>
-                            <a href="#">
-                                <img src="${pageContext.request.contextPath}/jsp/admin/images/deleteIcon.png" alt="">
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>MYD01</td>
-                        <td>
-                            <div class="profileSec">
-                                <div class="tableProfile">
-                                    <img src="${pageContext.request.contextPath}/jsp/admin/images/profile.jpg">
-                                </div>
-                                <a href="patient">Maria Lupin James</a>
-                            </div>
-                        </td>
-                        <td>27 Yrs</td>
-                       
-                        <td>Bangalore</td>
-                        <td>+91-9742225501</td>
-                        <td><a href="#">yogeshwaranworld@gmail.com</a></td>
-                        <td>May 10, 2020</td>
-                       
-
-                        <td>
-                            <a href="#">
-                                <img src="${pageContext.request.contextPath}/jsp/admin/images/activeIcon.png" class="mr-5" alt="">
-                            </a>
-                            <a href="#">
-                                <img src="${pageContext.request.contextPath}/jsp/admin/images/deleteIcon.png" alt="">
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>MYD01</td>
-                        <td>
-                            <div class="profileSec">
-                                <div class="tableProfile">
-                                    <img src="${pageContext.request.contextPath}/jsp/admin/images/profile.jpg">
-                                </div>
-                                <a href="patient">Maria Lupin James</a>
-                            </div>
-                        </td>
-                        <td>27 Yrs</td>
-                       
-                        <td>Bangalore</td>
-                        <td>+91-9742225501</td>
-                        <td><a href="#">yogeshwaranworld@gmail.com</a></td>
-                        <td>May 10, 2020</td>
-                       
-
-                        <td>
-                            <a href="#">
-                                <img src="${pageContext.request.contextPath}/jsp/admin/images/activeIcon.png" class="mr-5" alt="">
-                            </a>
-                            <a href="#">
-                                <img src="${pageContext.request.contextPath}/jsp/admin/images/deleteIcon.png" alt="">
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
+					  
+					  
+                   </c:forEach>
+                   <%--  <tr>
                         <td>MYD01</td>
                         <td>
                             <div class="profileSec">
@@ -304,7 +140,7 @@
                         </td>
                     </tr>
 
-                  
+                   --%>
 
 
                 </table>

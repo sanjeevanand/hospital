@@ -2,6 +2,7 @@ package com.hospital.controller;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hospital.jpa.AddressRepository;
 import com.hospital.jpa.PatientRepository;
+import com.hospital.model.Doctor;
 import com.hospital.model.Patient;
 import com.hospital.util.HospitalUtil;
 
@@ -69,7 +71,13 @@ public class PatientController {
 
 					req.getSession().setAttribute("userPatient", user);
 				}
+				if(null!=user.getStatus() && user.getStatus().equals("1"))
 				return "redirect:/patient/dashboard";
+				else
+				{
+					m.addAttribute("pwd", "verify your account");
+					return "logind";
+				}
 			} else {
 				System.out.println("path=/admin/fail");
 				m.addAttribute("pwd", "Invalid Password");
@@ -232,14 +240,27 @@ public class PatientController {
 		Patient temp =  (Patient) req.getSession().getAttribute("userPatient");
 		if(null==patient.getPassword())
 			patient.setPassword(temp.getPassword());
-		
+		if(null==patient.getStatus())
+			patient.setStatus(temp.getStatus());
 		patientRepository.save(patient);	
 		req.getSession().setAttribute("userPatient", patient);
 		m.addAttribute("msg", "Record inserted !");
 		return "redirect:/patient/profile";
 		}
 	}
+	@GetMapping("/settings")
+	public String setting(HttpServletRequest req,Model m) {
+		System.out.println("path=/setting");
+		Patient sessionPatient = (Patient) req.getSession().getAttribute("userPatient");
 	
+		if (sessionPatient != null) {
+			m.addAttribute("userPatient", sessionPatient);
+			return "settingsp";
+		}
+		else {
+			return "loginp";
+		}
+	}
 	@GetMapping("/medical_record")
 	public String medical_record(HttpServletRequest req, Model m) {
 		System.out.println("path=/admin/profile");
@@ -283,6 +304,37 @@ public class PatientController {
 		}
 		else
 			return "redirect:/patient/";
+	}
+	@PostMapping("changePassword")
+	public String changePassword(HttpServletRequest req, Model m) {
+		
+		System.out.println("path=/changePassword");
+		Patient sessionPatient = (Patient) req.getSession().getAttribute("userPatient");
+
+	
+		if (sessionPatient != null) {
+			String pass = req.getParameter("password");
+			String newpassword = req.getParameter("newPassword");
+			String renewpassword = req.getParameter("newRepassword");
+			if(pass.equals(sessionPatient.getPassword())) {
+				if(newpassword.equals(renewpassword)) {
+					Optional<Patient> patient =	patientRepository.findById(sessionPatient.getPatientId());
+					patient.get().setPassword(newpassword);
+				}
+				else {
+					m.addAttribute("msg", "New password and Confirm Password doesn't matched");
+				}
+			}
+			else {
+				m.addAttribute("msg", "Entered Current password incorrect !");
+				
+			}
+			return "settingsp";
+		}
+		else {
+			return "loginp";
+		}
+		
 	}
 	@GetMapping("/logout")
 	public String destroySession(HttpServletRequest request) {

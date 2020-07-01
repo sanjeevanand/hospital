@@ -97,7 +97,7 @@
                         <td>
                             <div class="profileSec">
                                 <div class="tableProfile">
-                                    <img src="${pageContext.request.contextPath}/jsp/admin/images/profile.jpg">
+                                    <img src="${pageContext.request.contextPath}/jsp/doctor/images/${doctor.profile}">
                                 </div>
                                 <a href="${doctor.firstname}">${doctor.firstname}</a>
                             </div>

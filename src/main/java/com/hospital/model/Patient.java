@@ -29,7 +29,7 @@ public class Patient implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="patient_id")
-	private int patientId;
+	private long patientId;
 	@Column
 	private String name;
 	@Column
@@ -54,7 +54,8 @@ public class Patient implements Serializable{
     private String language;
 	@Column
 	private String password;
-	
+	@Column
+	private String status;
 	@Column
 	private String imagePath;
 	
@@ -85,8 +86,12 @@ public class Patient implements Serializable{
 		return name;
 	}
 
-	public int getPatientId() {
+	public long getPatientId() {
 		return patientId;
+	}
+
+	public void setPatientId(long patientId) {
+		this.patientId = patientId;
 	}
 
 	public void setName(String name) {
@@ -179,6 +184,14 @@ public class Patient implements Serializable{
 
 	public void setImagePath(String imagePath) {
 		this.imagePath = imagePath;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	@Override

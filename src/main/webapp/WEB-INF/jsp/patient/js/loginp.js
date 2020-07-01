@@ -16,8 +16,14 @@ $(function () {
                         		alert("user already exists")
                         	}else{
                         	 $('#registerUser').hide();
-                        	 $("#otpMob").text(data.mobile);
-                             $('#verifyOtp').show();
+             				if (data.mobile.length == 0){
+             					$("#otpMob").text(data.email);
+             					$('.loginTab').hide();
+             					$('#emailConfirm').show();
+             					}
+             				else{
+             					$("#otpMob").text(data.mobile);
+             					$('#verifyOtp').show();}
                         	}
                         }
                      );

@@ -31,7 +31,7 @@ public class Doctor implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="doctor_id")
-	private int doctorId;
+	private long doctorId;
 	
 	@Column
 	private String prefix;
@@ -59,6 +59,16 @@ public class Doctor implements Serializable{
 	
 	@Column
     private String city;
+	@Column
+    private String profile;
+	public String getProfile() {
+		return profile;
+	}
+
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
+
 	@Column
     private String experience;
 	@Column
@@ -129,11 +139,11 @@ public class Doctor implements Serializable{
 		this.otpList.add(otp);
 	}
 
-	public int getDoctorId() {
+	public long getDoctorId() {
 		return doctorId;
 	}
 
-	public void setDoctorId(int doctorId) {
+	public void setDoctorId(long doctorId) {
 		this.doctorId = doctorId;
 	}
 

@@ -3,11 +3,15 @@ package com.hospital.controller;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,13 +27,10 @@ import com.hospital.jpa.DoctorRepository;
 import com.hospital.jpa.MasterRepository;
 import com.hospital.jpa.ServiceMasterRepository;
 import com.hospital.jpa.SpecializationMasterRepository;
-import com.hospital.jpa.DoctorRepository;
 import com.hospital.model.Doctor;
-import com.hospital.model.ServiceDoctor;
 import com.hospital.model.ServiceMaster;
-import com.hospital.model.SpecializationMaster;
+import com.hospital.sms.WSApiNN;
 import com.hospital.util.HospitalUtil;
-import com.hospital.model.Doctor;
 
 @Controller
 @RequestMapping("/doctor")
@@ -49,6 +50,11 @@ public class DoctorController {
 	
 	@Autowired
 	AddressRepository addressRepository;
+	
+	@Value("${hospital.url}")
+	private String hospitalUrl;
+	@Autowired
+	private JavaMailSender javaMailSender;
 	
 	@GetMapping("/")
 	public String homepage(HttpServletRequest request) {
@@ -77,10 +83,17 @@ public class DoctorController {
 
 					req.getSession().setAttribute("userDoctor", user);
 				}
+				if(user.getStatus().equals("1"))
 				return "redirect:/doctor/dashboard";
+				else
+				{
+					m.addAttribute("pwd", "verify your account");
+					return "logind";
+				}
 			} else {
 				System.out.println("path=/admin/fail");
-				m.addAttribute("pwd", "Invalid Password");
+				
+				m.addAttribute("pwd", "Invalid Password Or verify your account");
 				return "logind";
 			}
 		} else {
@@ -117,10 +130,28 @@ public class DoctorController {
 		System.out.println("path=/admin/resetAction");
 		String email = req.getParameter("email");
 		// String pswd = req.getParameter("pswd");
-
-		Doctor user = doctorRepository.findByMobile(email);
+		int ctr = 0;
+		Doctor user = null;
+		if (HospitalUtil.isEmail(email)) {
+			user = doctorRepository.findByEmail(email);
+			ctr=1;
+		} else {
+			user = doctorRepository.findByMobile(email);
+			ctr=2;
+		}
+	//	doctorRepository.findByMobile(email);
 		if (null != user) {
-			model.addAttribute("msg", "reset link sent to mobile");
+			if(ctr==1) {
+			model.addAttribute("msg", "reset link sent to email");
+			user.setStatus("0");
+			doctorRepository.save(user);
+			sendEmail(user);
+			}
+			else {
+				model.addAttribute("msg", "reset link sent to mobile");
+				//need to implement sms logic here ..
+				//WSApiNN.sendSms(stored.getMobile(),stored.getOtpList().get(0).getOtp());
+				}
 			return "forgotPasswordd";
 		} else {
 			model.addAttribute("msg", "Invalid Mobile No.");
@@ -128,13 +159,20 @@ public class DoctorController {
 		}
 
 	}
-	@GetMapping("reset/{mobile}")
-	public String reset(@PathVariable String mobile, HttpServletRequest req, Model m) {
+	@GetMapping("reset/{email:.+}")
+	public String reset(@PathVariable String email, HttpServletRequest req, Model m) {
 		System.out.println("path=/admin/reset");
-		// String email= req.getParameter("txtEmail");
-		Doctor user = doctorRepository.findByMobile(mobile);
+		int ctr = 0;
+		Doctor user = null;
+		if (HospitalUtil.isEmail(email)) {
+			user = doctorRepository.findByEmail(email);
+			ctr=1;
+		} else {
+			user = doctorRepository.findByMobile(email);
+			ctr=2;
+		}
 		if (null != user) {
-			m.addAttribute("mobile", user.getMobile());
+			m.addAttribute("mobile", user.getEmail());
 
 			return "resetPasswordd";
 		} else {
@@ -148,10 +186,18 @@ public class DoctorController {
 		System.out.println("path=/admin/resetAction");
 		String pass = req.getParameter("pass");
 		String repass = req.getParameter("repass");
-		String mobile = req.getParameter("mobile");
+		String email = req.getParameter("mobile");
 		// String pswd = req.getParameter("pswd");
 		if(pass.equals(repass)){
-		Doctor user = doctorRepository.findByMobile(mobile);
+		int ctr = 0;
+		Doctor user = null;
+		if (HospitalUtil.isEmail(email)) {
+			user = doctorRepository.findByEmail(email);
+			ctr=1;
+		} else {
+			user = doctorRepository.findByMobile(email);
+			ctr=2;
+		}
 		if (null != user) {
 			model.addAttribute("msg", "reset link sent to mobile");
 			user.setPassword(pass);
@@ -210,7 +256,10 @@ public class DoctorController {
 			doctor.setPassword(temp.getPassword());
 		if(null==doctor.getCreated_at())
 			doctor.setCreated_at(temp.getCreated_at());
-		
+		if(null==doctor.getStatus())
+			doctor.setStatus(temp.getStatus());
+		if(null==doctor.getProfile())
+			doctor.setStatus(temp.getProfile());
 		doctorRepository.save(doctor);	
 		req.getSession().setAttribute("userDoctor", doctor);
 		m.addAttribute("msg", "Record inserted !");
@@ -255,8 +304,8 @@ public class DoctorController {
 			String renewpassword = req.getParameter("newRepassword");
 			if(pass.equals(sessionPatient.getPassword())) {
 				if(newpassword.equals(renewpassword)) {
-				Doctor doctor =	doctorRepository.findByMobile(sessionPatient.getMobile());
-				doctor.setPassword(newpassword);
+				Optional<Doctor> doctor =	doctorRepository.findById(sessionPatient.getDoctorId());
+				doctor.get().setPassword(newpassword);
 				}
 				else {
 					m.addAttribute("msg", "New password and Confirm Password doesn't matched");
@@ -352,4 +401,17 @@ public class DoctorController {
 			return "logind";
 		}
 	}
+	
+	void sendEmail(Doctor doctor) {
+
+        SimpleMailMessage msg = new SimpleMailMessage();
+        msg.setTo(""+doctor.getEmail());
+
+        msg.setSubject("Reset mail from DigiKlinik");
+      //  msg.setText(patient.getOtpList().get(0).toString());
+        String url = "http://"+hospitalUrl+"/doctor/reset/"+doctor.getEmail();
+        msg.setText(url);
+        javaMailSender.send(msg);
+
+    }
 }

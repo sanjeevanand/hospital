@@ -185,6 +185,16 @@
                 </div>
                 </form:form>
             </div>
+             <div class="col-sm-4">
+                   <form action="/doUpload" method="post" enctype="multipart/form-data">
+                     <div class="doctorProfile mb-20">
+                        <img src="${pageContext.request.contextPath}/images/${userDoctor.profile}">
+                    </div> 
+                     <input type="file" name="file">
+                    <button type="submit" class="btn btn-primary mr-10">Upload</button>
+                    <button class="btn btn-default">Cancel</button>
+                    </form>
+                </div>
         </div>
     </section>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

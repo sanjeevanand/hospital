@@ -10,7 +10,11 @@ import java.util.Random;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.tomcat.jni.Thread;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -32,20 +36,27 @@ import com.hospital.model.Otp;
 import com.hospital.model.ServiceDoctor;
 import com.hospital.model.SpecializationDoctor;
 import com.hospital.model.WorkExperience;
+import com.hospital.sms.WSApiNN;
 import com.hospital.util.HospitalUtil;
 
 @RestController
 @RequestMapping("/rest")
 public class DoctorRestController {
+	
+	  private static final Logger logger = LoggerFactory.getLogger(DoctorRestController.class);
 	@Autowired
 	DoctorRepository doctorRepository;
 	@Autowired
 	OtpRepository OtpRepository;
 	@Autowired
 	private JavaMailSender javaMailSender;
+	
+	@Value("${hospital.url}")
+	private String hospitalUrl;
 
 	@PostMapping(value = "/doctorRegistration", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 	public Doctor createUser(Doctor doctor) {
+		logger.info("doctorRegistration");
 		System.out.println(doctor);
 		Doctor temp = null;
 		int ctr = 0;
@@ -73,10 +84,19 @@ public class DoctorRestController {
 			Doctor stored = doctorRepository.save(doctor);
 			if (ctr == 1)
 			sendEmail(stored);
+			else
+				try {
+					WSApiNN.sendSms(stored.getMobile(),stored.getOtpList().get(0).getOtp());
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			
 			return stored;
 		} else {
-			temp.setFirstname("exist");
-			return temp;
+			Doctor x = new Doctor();
+			x.setFirstname("exist");
+			return x;
 		}
 	}
 
@@ -91,10 +111,14 @@ public class DoctorRestController {
 	//	Doctor obj = doctorRepository.findByMobile(arg.get("mobile"));
 		int i = obj.getOtpList().size();
 		Otp otp = obj.getOtpList().get(i-1);
-		if (("P" + arg.get("otp")).equals(otp.getOtp()))
+		if (("P" + arg.get("otp")).equals(otp.getOtp())) {
+			obj.setStatus("1");
 			return true;
+		}
 		else
+		{
 			return false;
+		}
 	}
 
 	@PostMapping(value = "/doctorDeactivate", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
@@ -365,7 +389,8 @@ public class DoctorRestController {
 
         msg.setSubject("Welcome mail from DigiKlinik");
         String msg1 = "your otp is "+doctor.getOtpList().get(0).getOtp();
-        msg.setText(msg1);
+        String url = "http://"+hospitalUrl+"/rest/doctorverifyLink/"+doctor.getEmail();
+        msg.setText(url);
 
 
 
@@ -373,4 +398,12 @@ public class DoctorRestController {
         javaMailSender.send(msg);
 
     }
+	@GetMapping(value = "/doctorverifyLink/{email:.+}")
+	public void doctorverifyLink(@PathVariable("email") String email,HttpServletRequest req,HttpServletResponse response) throws IOException {
+
+			Doctor obj = doctorRepository.findByEmail(email);
+		    obj.setStatus("1");
+			doctorRepository.save(obj);
+		response.sendRedirect("/doctor/");
+	}
 }

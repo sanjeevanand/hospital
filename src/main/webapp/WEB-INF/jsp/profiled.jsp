@@ -188,14 +188,18 @@
                         <a href="#" class="btn btn-primary"><span>Cancel</span> </a>
                     </div>
                 </div>
+                </div>
 		</form:form>
-                <!--  <div class="col-sm-4">
-                    <div class="doctorProfile mb-20">
-                        <img src="${pageContext.request.contextPath}/jsp/doctor/images/patientProfile.jpg">
-                    </div>
-                    <button class="btn btn-primary mr-10">Upload</button>
-                    <button class="btn btn-default">Cancel</button>
-                </div>-->
+                  <div class="col-sm-4">
+                   <form action="/doUpload" method="post" enctype="multipart/form-data">
+                     <div class="doctorProfile mb-20">
+                        <img src="${pageContext.request.contextPath}/jsp/doctor/images/${userDoctor.profile}">
+                    </div> 
+                    <input type="file" name="file" class="btn btn-primary mr-10">
+                    <button type="" class="btn btn-primary mr-10">Upload</button>
+                    
+                    </form>
+                </div>
 
             </div>
 

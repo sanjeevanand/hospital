@@ -45,7 +45,7 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="settings">
                     <img src="${pageContext.request.contextPath}/jsp/patient/images/menuIcons/setting.png">
                     <span class="menuText">Settings</span>
 

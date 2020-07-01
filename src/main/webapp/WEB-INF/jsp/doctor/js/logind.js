@@ -13,15 +13,18 @@ $(function() {
 			"mobile" : $("#mobile").val(),
 			"password" : $("#password").val()
 		}, function(data) {
-			if (data.name === "exist") {
+			if (data.firstname === "exist") {
 				alert("user already exists")
 			} else {
 				$('#registerUser').hide();
-				if (data.mobile.length == 0)
+				if (data.mobile.length == 0){
 					$("#otpMob").text(data.email);
-				else
+					$('.loginTab').hide();
+					$('#emailConfirm').show();
+					}
+				else{
 					$("#otpMob").text(data.mobile);
-				$('#verifyOtp').show();
+					$('#verifyOtp').show();}
 			}
 		});
 		//  $('#registerUser').hide();

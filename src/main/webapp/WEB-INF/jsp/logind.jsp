@@ -115,6 +115,17 @@
                 </div>
                 <button class="btn btn-primary btn-block" id="verifyOtpBtn">Verify OTP</button>
             </div>
+            <div id="emailConfirm" class="patientRight" style="display: none;">
+            <h2 style="font-size:30px;">Verify your email address</h2>
+            <h4 style="line-height:24px">
+                A confirmation link has been sent to example@gmail.com. Click on the link sent to verify your account.
+            </h4>
+			<p>&nbsp;</p>
+			<h4 style="line-height:24px">Didn't get a confirmation email?
+
+			Check your spam folder or <a href="#">Send again</a></h4>
+          
+        </div>
         </div>
     </section>
     <footer class="loginFooter">
