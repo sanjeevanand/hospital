@@ -14,8 +14,25 @@
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap"
         rel="stylesheet">
+         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+ 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/jsp/doctor/css/bootstrap-datepicker.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/jsp/doctor/css/app.css">
+    	<style type="text/css">
+	.upload-btn-wrapper {
+		position: relative;
+		overflow: hidden;
+		display: inline-flex;
+	}
+
+
+	.upload-btn-wrapper input[type=file] {
+		position: absolute;
+		left: 0;
+		top: 0;
+		opacity: 0;
+	}
+</style>
 </head>
 
 <body>
@@ -78,15 +95,18 @@
                             <div class="inputGroup">
                                 <label>Gender</label>
                                 <div class="checkboxGropup mr-10">
-                                    <input type="radio" name="gender" id="male">
+                                   <!--  <input type="radio" name="gender" id="male"> -->
+                                     <form:radiobutton path="gender" value="Male"/>  
                                     <label for="male">Male</label>
                                 </div>
                                 <div class="checkboxGropup mr-10">
-                                    <input type="radio" name="gender" id="female">
+                                   <!--  <input type="radio" name="gender" id="female"> -->
+                                   <form:radiobutton path="gender" value="Female"/>  
                                     <label for="female">Female</label>
                                 </div>
                                 <div class="checkboxGropup mr-10">
-                                    <input type="radio" name="gender" id="others">
+                                   <!--  <input type="radio" name="gender" id="others"> -->
+                                    <form:radiobutton path="gender" value="others"/>  
                                     <label for="others">Others</label>
                                 </div>
                             </div>
@@ -130,12 +150,21 @@
                                   <form:input type="text" path="experience" class="form-control" placeholder="Enter Years of Experience"/>
                             </div>
                         </div>
+                         <div class="col-sm-12">
+                            <div class="inputGroup">
+                                 <label>Language</label>
+                                <form:select path="language" name="" id="language" class="form-control">
+                                     <form:options items="${lang}" />
+                                </form:select>
+                        </div>
+                        </div>
                         <div class="col-sm-12">
                             <div class="inputGroup">
                                 <label>Doctor Description</label>
                                 <form:textarea path="description" name="" id="" cols="30" rows="6" placeholder="Enter Description"
                                     class="form-control"/>
                         </div>
+                    </div>
                     </div>
                     <h1 class="form-title">
                         Contact Details
@@ -188,15 +217,22 @@
                         <a href="#" class="btn btn-primary"><span>Cancel</span> </a>
                     </div>
                 </div>
-                </div>
+             
 		</form:form>
                   <div class="col-sm-4">
                    <form action="/doUpload" method="post" enctype="multipart/form-data">
                      <div class="doctorProfile mb-20">
-                        <img src="${pageContext.request.contextPath}/jsp/doctor/images/${userDoctor.profile}">
+                        <img src="${pageContext.request.contextPath}/images/${userDoctor.profile}">
                     </div> 
-                    <input type="file" name="file" class="btn btn-primary mr-10">
-                    <button type="" class="btn btn-primary mr-10">Upload</button>
+                    
+                     <div class="upload-btn-wrapper">
+							<button class="btn btn-primary mr-10">Browse</button>
+							<input type="file" name="file" />
+							
+					</div>
+					 <button type="" class="btn btn-primary mr-10">Upload</button>
+                    <!-- <input type="file" name="file" class="btn btn-primary mr-10">
+                    <button type="" class="btn btn-primary mr-10">Upload</button> -->
                     
                     </form>
                 </div>
@@ -207,17 +243,25 @@
         </div>
 
     </section>
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+ 
     <script src="${pageContext.request.contextPath}/jsp/doctor/js/jquery.nicescroll.min.js"></script>
-    <script src="${pageContext.request.contextPath}/jsp/doctor/js/bootstrap-datepicker.min.js"></script>
-    <script src="${pageContext.request.contextPath}/jsp/doctor/js/app.js"></script>
+   <%--  <script src="${pageContext.request.contextPath}/jsp/doctor/js/bootstrap-datepicker.min.js"></script>
+   --%>  <script src="${pageContext.request.contextPath}/jsp/doctor/js/app.js"></script>
     <script>
         $(function () {
             $('#filter button').click(function () {
                 $('.btn-primary').removeClass('btn-primary');
                 $(this).removeClass('btn-default').addClass('btn-primary');
-            })
+            });
+            $( "#dob" ).datepicker({
+                changeMonth: true,
+                changeYear: true
+              });
         });
     </script>
 </body>

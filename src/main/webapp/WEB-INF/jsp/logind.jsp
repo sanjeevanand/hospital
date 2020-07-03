@@ -48,10 +48,11 @@
             </ul>
             <div id="loginSection" class="tabSec">
 
-                <form action="loginSubmit" method="post">
+                <form action="loginSubmit" method="post"  onsubmit="return validateForm()">
                     <label for="">Mobile Number / Email ID</label>
-                    <input type="text" name="mobile" id="" placeholder="Mobile Number/ Emai ID" class="form-control mb-15">
-                    <label for="">Password</label><small>${email}</small>
+                    <input type="text" name="mobile" id="mobile" placeholder="Mobile Number/ Emai ID" class="form-control mb-15">
+                    <small>${email}</small><br><label for="">Password</label>
+
                     <input type="password" name="pwd" id="pwd" placeholder="Password" class="form-control mb-15">
                     <small>${pwd}</small>
                     <div class="row mb-15">
@@ -63,7 +64,7 @@
                             <a href="/doctor/forgotPassword">Forgot password?</a>
                         </div>
                     </div>
-                    <button class="btn btn-primary btn-block" type="submit">Login</button>
+                    <button id="login" class="btn btn-primary btn-block" type="submit">Login</button>
                     <p>Or</p>
                     <button class="btn btn-primary btn-block fb-btn">Connect with Facebook</button>
                 </form>

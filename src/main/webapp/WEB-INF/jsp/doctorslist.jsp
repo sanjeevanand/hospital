@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Docters List</title>
+    <title>Doctors List</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
@@ -15,6 +15,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/jsp/admin/css/bootstrap-datepicker.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/jsp/admin/css/app.css">
+    
 </head>
 
 <body>
@@ -78,7 +79,9 @@
                 <table class="themeTable" style="min-width: 100%;">
                     <tr>
                         <th width="10%">Doctor Id</th>
-                        <th width="20%">Doctor Name</th>
+                        <th width="15%">Doctor Name</th>
+                        <th width="20%">Email</th>
+                        <th width="10%">Mobile</th>
                         <th width="10%">Speciality</th>
                         <th width="15%">Created Date</th>
                         <th width="10%">Location</th>
@@ -97,11 +100,13 @@
                         <td>
                             <div class="profileSec">
                                 <div class="tableProfile">
-                                    <img src="${pageContext.request.contextPath}/jsp/doctor/images/${doctor.profile}">
+                                    <img src="${pageContext.request.contextPath}/images/${doctor.profile}">
                                 </div>
                                 <a href="${doctor.firstname}">${doctor.firstname}</a>
                             </div>
                         </td>
+                        <td>${doctor.email}</td>
+                        <td>${doctor.mobile}</td>
                         <td>Dental</td>
                         <td>${doctor.created_at}</td>
                         <td>${doctor.location}</td>

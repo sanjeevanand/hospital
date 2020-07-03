@@ -18,8 +18,8 @@ $(function(){
         $('#filterSec').slideToggle()
     });
   
-    $('.date').datepicker();
-    
+  /*  $('.date').datepicker();
+    */
     $('#regdocUpdate').click(function(e){
     	$.post( 
                 "/rest/doctorRegistrationDoc",
@@ -132,3 +132,4 @@ $(function(){
              );
     });
 })
+

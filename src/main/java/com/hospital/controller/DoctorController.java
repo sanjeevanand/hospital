@@ -1,9 +1,11 @@
 package com.hospital.controller;
 
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -28,6 +30,7 @@ import com.hospital.jpa.MasterRepository;
 import com.hospital.jpa.ServiceMasterRepository;
 import com.hospital.jpa.SpecializationMasterRepository;
 import com.hospital.model.Doctor;
+import com.hospital.model.Otp;
 import com.hospital.model.ServiceMaster;
 import com.hospital.sms.WSApiNN;
 import com.hospital.util.HospitalUtil;
@@ -69,12 +72,14 @@ public class DoctorController {
 		System.out.println("path=/admin/loginSubmit");
 		String mobile = req.getParameter("mobile");
 		String pswd = req.getParameter("pwd");
+
 		Doctor user = null;
 		if (HospitalUtil.isEmail(mobile)) {
 			user = doctorRepository.findByEmail(mobile);
 		} else {
 			user = doctorRepository.findByMobile(mobile);
 		}
+
 		if (user != null) {
 			Doctor sessionDoctor = (Doctor) req.getSession().getAttribute("userDoctor");
 
@@ -93,12 +98,12 @@ public class DoctorController {
 			} else {
 				System.out.println("path=/admin/fail");
 				
-				m.addAttribute("pwd", "Invalid Password Or verify your account");
+				m.addAttribute("pwd", "Password field cannot be empty");
 				return "logind";
 			}
 		} else {
 			System.out.println("path=/admin/fail");
-			m.addAttribute("email", "Invalid email ID or user does not exist");
+			m.addAttribute("email", "Mobile Number / Email ID field cannot be empty");
 			return "logind";
 		}
 	}
@@ -116,13 +121,11 @@ public class DoctorController {
 			return "logind";
 		}
 	}
-	
 	@GetMapping("/forgotPassword")
 	public String forgot(@RequestParam(value = "msg", required = false) String msg, Model model) {
 		System.out.println("path=/admin/forgotPassword");
 		if (msg != null)
 			model.addAttribute("msg", msg);
-
 		return "forgotPasswordd";
 	}
 	@PostMapping("forgotsubmit")
@@ -143,23 +146,59 @@ public class DoctorController {
 		if (null != user) {
 			if(ctr==1) {
 			model.addAttribute("msg", "reset link sent to email");
+			model.addAttribute("email",email);
 			user.setStatus("0");
 			doctorRepository.save(user);
 			sendEmail(user);
+			
+			return "forgot_email_sent";
 			}
 			else {
-				model.addAttribute("msg", "reset link sent to mobile");
+				model.addAttribute("msg", "Mobile no is not verified");
+				
+				model.addAttribute("email",email);
+				user.setStatus("0");
+				Random x = new Random();
+				String otp = "P" + x.nextInt(9999);
+				System.out.println(otp);
+				// doctor.setAddress(new Address());
+				user.addOtpList(new Otp(otp, new Date()));
+				doctorRepository.save(user);
 				//need to implement sms logic here ..
-				//WSApiNN.sendSms(stored.getMobile(),stored.getOtpList().get(0).getOtp());
+				try {
+					int size = user.getOtpList().size();
+					if(size>0)
+					WSApiNN.sendSms(user.getMobile(),user.getOtpList().get(size-1).getOtp());
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-			return "forgotPasswordd";
+				return "forgot_otp_send";
+				}
+			//return "forgotPasswordd";
 		} else {
-			model.addAttribute("msg", "Invalid Mobile No.");
+			model.addAttribute("msg", "Invalid Mobile/Email Id");
 			return "forgotPasswordd";
 		}
 
 	}
-	@GetMapping("reset/{email:.+}")
+	@GetMapping("/forgotEmailSent")
+	public String forgotEmailSent(@RequestParam(value = "msg", required = false) String msg, Model model) {
+		System.out.println("path=/admin/forgotPassword");
+		if (msg != null)
+			model.addAttribute("msg", msg);
+
+		return "forgot_email_sent";
+	}
+	@GetMapping("/forgotOtpSend")
+	public String forgotOtpSend(@RequestParam(value = "msg", required = false) String msg, Model model) {
+		System.out.println("path=/admin/forgotPassword");
+		if (msg != null)
+			model.addAttribute("msg", msg);
+
+		return "forgot_otp_send";
+	}
+	@GetMapping("/reset/{email:.+}")
 	public String reset(@PathVariable String email, HttpServletRequest req, Model m) {
 		System.out.println("path=/admin/reset");
 		int ctr = 0;
@@ -173,7 +212,6 @@ public class DoctorController {
 		}
 		if (null != user) {
 			m.addAttribute("mobile", user.getEmail());
-
 			return "resetPasswordd";
 		} else {
 			m.addAttribute("msg", "Invalid email ID or user does not exist");
@@ -182,7 +220,7 @@ public class DoctorController {
 
 	}
 	@PostMapping("saveDoctorSubmit")
-	public String savePatientSubmit(HttpServletRequest req, Model model) {
+	public String saveDoctorSubmit(HttpServletRequest req, Model model) {
 		System.out.println("path=/admin/resetAction");
 		String pass = req.getParameter("pass");
 		String repass = req.getParameter("repass");
@@ -199,8 +237,9 @@ public class DoctorController {
 			ctr=2;
 		}
 		if (null != user) {
-			model.addAttribute("msg", "reset link sent to mobile");
+		//	model.addAttribute("msg", "reset link sent to mobile");
 			user.setPassword(pass);
+			user.setStatus("1");
 			doctorRepository.save(user);
 			return "logind";
 		} else {
@@ -234,7 +273,7 @@ public class DoctorController {
 			
 			Map<String, String> lang = new LinkedHashMap<String, String>();
 			lang.put("English", "English");
-			lang.put("Tamil", "Tamil");
+			lang.put("Turkish", "Turkish");
 			
 			m.addAttribute("lang", lang);
 			return "profiled";
@@ -259,9 +298,9 @@ public class DoctorController {
 		if(null==doctor.getStatus())
 			doctor.setStatus(temp.getStatus());
 		if(null==doctor.getProfile())
-			doctor.setStatus(temp.getProfile());
+			doctor.setProfile(temp.getProfile());
 		doctorRepository.save(doctor);	
-		req.getSession().setAttribute("userDoctor", doctor);
+		req.getSession().setAttribute("userDoctor", doctor);	
 		m.addAttribute("msg", "Record inserted !");
 		return "redirect:/doctor/profile";
 		}
@@ -401,7 +440,15 @@ public class DoctorController {
 			return "logind";
 		}
 	}
-	
+
+	/*
+	 * @GetMapping("/forgotPassword") public String forgot(@RequestParam(value =
+	 * "msg", required = false) String msg, Model model) {
+	 * System.out.println("path=/admin/forgotPassword"); if (msg != null)
+	 * model.addAttribute("msg", msg);
+	 * 
+	 * return "forgotPasswordd"; }
+	 */
 	void sendEmail(Doctor doctor) {
 
         SimpleMailMessage msg = new SimpleMailMessage();

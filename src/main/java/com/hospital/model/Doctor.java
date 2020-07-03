@@ -101,7 +101,25 @@ public class Doctor implements Serializable{
 	@Column
 	private String regYear;
 	
+	@Column
+	private String language;
 	
+	public String getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(String language) {
+		this.language = language;
+	}
+	/*
+	 * @Column private List<String> language;
+	 * 
+	 * 
+	 * public List<String> getLanguage() { return language; }
+	 * 
+	 * public void setLanguage(List<String> language) { this.language = language; }
+	 */
+
 	public String getRegNo() {
 		return regNo;
 	}

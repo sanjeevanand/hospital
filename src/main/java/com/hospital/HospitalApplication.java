@@ -12,7 +12,6 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 @SpringBootApplication
 public class HospitalApplication  extends SpringBootServletInitializer {
 	 private static final Logger logger =  LogManager.getLogger(HospitalApplication.class.getName());
-	   
 	public static void main(String[] args) {
 		
 		SpringApplication.run(HospitalApplication.class, args);

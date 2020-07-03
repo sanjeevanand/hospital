@@ -12,6 +12,6 @@
             <span>${userDoctor.firstname}</span>
         </p>
         <div class="profileImage">
-            <img src="${pageContext.request.contextPath}/jsp/doctor/images/profile.jpg">
+            <img style="width: 100%;height:40px" src="${pageContext.request.contextPath}/images/${doctor.profile}">
         </div>
     </header>

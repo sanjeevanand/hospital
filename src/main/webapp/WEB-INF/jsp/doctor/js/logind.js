@@ -31,6 +31,7 @@ $(function() {
 		//  $('#verifyOtp').show();
 	});
 	$('#verifyOtpBtn').click(function(e) {
+		//validateForm();
 		$.post("/rest/doctorOtpVerify", {
 			"otp" : $("#otp").val(),
 			"mobile" : $("#mobile").val()
@@ -43,4 +44,18 @@ $(function() {
 			}
 		});
 	});
+	$('#login').click(function(e) {
+		//validateForm();
+		var email_mobile = $('#mobile').val();
+		var pwd = $('#pwd').val();
+		if(email_mobile===''){
+			 alert("Email/Phone Field should not be empty !");
+			    return false;
+		}
+		if(pwd===''){
+			 alert("Password must be filled out");
+			    return false;
+		}
+	});
+	
 });
